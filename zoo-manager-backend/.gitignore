@@ -1,0 +1,7 @@
+﻿# Ignore configuration file
+Config.cs
+
+# Ignore VS project build files
+.vs
+obj
+bin
