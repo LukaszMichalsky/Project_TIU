@@ -41,4 +41,12 @@ Projekt zakłada zbudowanie prostego systemu informatycznego do zarządzania ZOO
 
 ### Diagram ERD bazy danych
 
-![diagram-erd](https://raw.githubusercontent.com/LukaszMichalsky/Project_TIU/main/assets/images/ERD.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LukaszMichalsky/Project_TIU/main/assets/images/ERD.png" />
+</p>
+
+### Diagram PDM bazy danych
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LukaszMichalsky/Project_TIU/main/assets/images/PDM.png" />
+</p>
