@@ -38,3 +38,7 @@ Projekt zakłada zbudowanie prostego systemu informatycznego do zarządzania ZOO
 * Warstwa interfejsowa - Angular w wersji 11
 * Warstwa serwerowa - ASP.NET Core WebAPI
 * Baza danych - MongoDB
+
+### Diagram ERD bazy danych
+
+![diagram-erd](https://raw.githubusercontent.com/LukaszMichalsky/Project_TIU/main/assets/images/ERD.png)
