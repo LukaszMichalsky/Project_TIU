@@ -35,7 +35,7 @@ Projekt zakłada zbudowanie prostego systemu informatycznego do zarządzania ZOO
 
 #### Wykorzystane technologie
 
-* Warstwa interfejsowa - Angular w wersji 11
+* Warstwa interfejsowa - Angular w wersji 12
 * Warstwa serwerowa - ASP.NET Core WebAPI
 * Baza danych - MongoDB
 
