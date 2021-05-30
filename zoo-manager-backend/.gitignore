@@ -1,5 +1,5 @@
 ﻿# Ignore configuration file
-Config.cs
+Config/Config.cs
 
 # Ignore VS project build files
 .vs
