@@ -1,18 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using MongoDB.Driver;
 
 using zoo_manager_backend.Services;
+using zoo_manager_backend.Models;
 
 namespace zoo_manager_backend {
     public class Startup {
@@ -30,10 +26,9 @@ namespace zoo_manager_backend {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "zoo_manager_backend", Version = "v1" });
             });
 
-            services.AddSingleton<AnimalsService>();
-            services.AddSingleton<CategoriesService>();
-            services.AddSingleton<FoodService>();
-            services.AddSingleton<ZookeepersService>();
+            services.AddSingleton(new MongoClient(Config.DB_CONNECTION_STRING));
+
+            services.AddSingleton<MongoService<Category>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
