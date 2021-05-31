@@ -46,7 +46,7 @@ namespace zoo_manager_backend.Services {
             }
         }
 
-        public T DeleteOne(FilterDefinition<T> filter) {
+        public T FindOneAndDelete(FilterDefinition<T> filter) {
             return collection.FindOneAndDelete(filter);
         }
     }

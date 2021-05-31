@@ -10,7 +10,6 @@ namespace zoo_manager_backend.Models {
     public class MongoModel {
         [BsonId]
         [BsonElement("id")]
-        [BsonRepresentation(BsonType.Int32)]
         public int Id { get; set; }
     }
 }
