@@ -13,34 +13,65 @@ namespace zoo_manager_backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase {
-        private readonly MongoService<Category> mongoService;
+        private readonly MongoService<AnimalType> animalTypeService;
+        private readonly MongoService<Category> categoryService;
 
-        public CategoriesController(MongoService<Category> mongoService) {
-            this.mongoService = mongoService;
-            mongoService.CollectionNamespace = "categories";
+        public CategoriesController(MongoService<Category> categoryService, MongoService<AnimalType> animalTypeService) {
+            this.categoryService = categoryService;
+            categoryService.CollectionNamespace = "categories";
+
+            this.animalTypeService = animalTypeService;
+            animalTypeService.CollectionNamespace = "animal-types";
         }
 
         [HttpGet]
-        [Route("get")]
-        public List<Category> GetCategories() {
-            return mongoService.Find((FilterDefinition<Category>) (category => true));
+        public IActionResult GetCategories() {
+            // Find all categories
+            return Ok(categoryService.Find((FilterDefinition<Category>) (category => true)));
         }
 
         [HttpGet]
-        [Route("get/{id}")]
-        public Category GetCategory(int id) {
-            return mongoService.Find(new FilterDefinitionBuilder<Category>().Where(category => category.Id == id)).SingleOrDefault();
+        [Route("{id}")]
+        public IActionResult GetCategory(int id) {
+            try {
+                // Find selected category
+                return Ok(categoryService.Find(new FilterDefinitionBuilder<Category>().Where(category => category.Id == id)).Single());
+            } catch {
+                // Return empty object
+                return Ok(new object {});
+            }
         }
 
         [HttpPost]
-        [Route("add")]
-        public Category AddCategory([FromBody] Category newCategory) {
-            int availableIndex = mongoService.GetAvailableId();
+        public IActionResult AddCategory([FromBody] Category newCategory) {
+            int availableIndex = categoryService.GetAvailableId();
 
-            return mongoService.InsertOne(new Category() {
+            // Return added category
+            return Ok(categoryService.InsertOne(new Category() {
                 CategoryName = newCategory.CategoryName,
                 Id = availableIndex
-            });
+            }));
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult DeleteCategory(int id) {
+            // Find category with given ID
+            Category selectedCategory = categoryService.Find(new FilterDefinitionBuilder<Category>().Where(category => category.Id == id)).SingleOrDefault();
+
+            if (selectedCategory == null) {
+                return BadRequest("Category not exists");
+            }
+
+            // Find animal types with given category ID
+            List<AnimalType> associatedAnimalTypes = animalTypeService.Find(new FilterDefinitionBuilder<AnimalType>().Where(type => type.TypeCategoryId == selectedCategory.Id));
+
+            if (associatedAnimalTypes.Count > 0) {
+                return Conflict("Category has associated animal types");
+            }
+
+            // Return deleted category
+            return Ok(categoryService.FindOneAndDelete(new FilterDefinitionBuilder<Category>().Where(category => category.Id == id)));
         }
     }
 }

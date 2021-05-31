@@ -28,6 +28,7 @@ namespace zoo_manager_backend {
 
             services.AddSingleton(new MongoClient(Config.DB_CONNECTION_STRING));
 
+            services.AddSingleton<MongoService<AnimalType>>();
             services.AddSingleton<MongoService<Category>>();
         }
 
