@@ -7,13 +7,22 @@ using zoo_manager_backend.Models;
 namespace zoo_manager_backend.Services {
     public class MongoService<T> where T : MongoModel {
         private readonly IMongoDatabase database;
-        private readonly IMongoCollection<T> collection;
+        private IMongoCollection<T> collection;
+        private string collectionNamespace = "default";
 
-        public string CollectionNamespace { get; set; } = "default";
+        public string CollectionNamespace {
+            get {
+                return collectionNamespace;
+            }
+
+            set {
+                collectionNamespace = value;
+                collection = database.GetCollection<T>(collectionNamespace);
+            }
+        }
 
         public MongoService(MongoClient client) {
             database = client.GetDatabase("db");
-            collection = database.GetCollection<T>(CollectionNamespace);
         }
 
         public int GetAvailableId() {
