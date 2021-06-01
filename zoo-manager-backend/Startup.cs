@@ -30,6 +30,7 @@ namespace zoo_manager_backend {
 
             services.AddSingleton<MongoService<AnimalType>>();
             services.AddSingleton<MongoService<Category>>();
+            services.AddSingleton<MongoService<Zookeeper>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

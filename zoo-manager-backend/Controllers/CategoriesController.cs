@@ -25,14 +25,14 @@ namespace zoo_manager_backend.Controllers {
         }
 
         [HttpGet]
-        public IActionResult GetCategories() {
+        public IActionResult GetAllCategories() {
             // Find all categories
-            return Ok(categoryService.Find((FilterDefinition<Category>) (category => true)));
+            return Ok(categoryService.Find(new FilterDefinitionBuilder<Category>().Empty));
         }
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetCategory(int id) {
+        public IActionResult GetSingleCategory(int id) {
             try {
                 // Find selected category
                 return Ok(categoryService.Find(new FilterDefinitionBuilder<Category>().Where(category => category.Id == id)).Single());
