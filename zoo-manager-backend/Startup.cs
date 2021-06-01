@@ -30,6 +30,8 @@ namespace zoo_manager_backend {
 
             services.AddSingleton<MongoService<AnimalType>>();
             services.AddSingleton<MongoService<Category>>();
+            services.AddSingleton<MongoService<Food>>();
+            services.AddSingleton<MongoService<FoodAssociation>>();
             services.AddSingleton<MongoService<Zookeeper>>();
         }
 
