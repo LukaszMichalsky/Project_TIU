@@ -13,15 +13,15 @@ namespace zoo_manager_backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ZookeepersController : ControllerBase {
-        private readonly MongoService<AnimalType> animalTypeService;
         private readonly MongoService<Zookeeper> zookeeperService;
+        private readonly MongoService<ZookeeperAssociation> zookeeperAssociationsService;
 
-        public ZookeepersController(MongoService<AnimalType> animalTypeService, MongoService<Zookeeper> zookeeperService) {
-            this.animalTypeService = animalTypeService;
-            animalTypeService.CollectionNamespace = "animal-types";
-
+        public ZookeepersController(MongoService<Zookeeper> zookeeperService, MongoService<ZookeeperAssociation> zookeeperAssociationsService) {
             this.zookeeperService = zookeeperService;
             zookeeperService.CollectionNamespace = "zookeepers";
+
+            this.zookeeperAssociationsService = zookeeperAssociationsService;
+            zookeeperAssociationsService.CollectionNamespace = "zookeeper-associations";
         }
 
         [HttpGet]
@@ -66,10 +66,10 @@ namespace zoo_manager_backend.Controllers {
             }
 
             // Find animal types with given zookeeper ID
-            List<AnimalType> associatedAnimalTypes = animalTypeService.Find(new FilterDefinitionBuilder<AnimalType>().Where(type => type.TypeZookeeperId == id));
+            List<ZookeeperAssociation> associatedAnimalTypes = zookeeperAssociationsService.Find(new FilterDefinitionBuilder<ZookeeperAssociation>().Where(association => association.TypeZookeeperId == id));
 
             if (associatedAnimalTypes.Count > 0) {
-                return Conflict("Zookeeper has associated animal types");
+                return Conflict("Zookeeper is already associated, delete zookeeper associations first");
             }
 
             // Return deleted zookeeper

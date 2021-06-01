@@ -34,7 +34,7 @@ namespace zoo_manager_backend.Controllers {
                 return Ok(foodAssociationService.Find(new FilterDefinitionBuilder<FoodAssociation>().Where(food => food.Id == id)).Single());
             } catch {
                 // Return empty object
-                return Ok(new object { });
+                return Ok(new object {});
             }
         }
 

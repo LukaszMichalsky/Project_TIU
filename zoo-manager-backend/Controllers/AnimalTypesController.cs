@@ -54,8 +54,7 @@ namespace zoo_manager_backend.Controllers {
             return Ok(animalTypeService.InsertOne(new AnimalType() {
                 Id = availableIndex,
                 TypeCategoryId = newAnimalType.TypeCategoryId,
-                TypeName = newAnimalType.TypeName,
-                TypeZookeeperId = newAnimalType.TypeZookeeperId
+                TypeName = newAnimalType.TypeName
             }));
         }
 

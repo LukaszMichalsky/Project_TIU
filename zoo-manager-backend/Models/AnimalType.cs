@@ -12,8 +12,5 @@ namespace zoo_manager_backend.Models {
 
         [BsonElement("type_category_id")]
         public int TypeCategoryId { get; set; }
-
-        [BsonElement("type_zookeeper_id")]
-        public int TypeZookeeperId { get; set; }
     }
 }
