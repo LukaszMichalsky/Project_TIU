@@ -17,7 +17,6 @@ namespace zoo_manager_backend.Controllers {
 
         public AnimalSpecimensController(MongoService<AnimalSpecimen> animalSpecimenService) {
             this.animalSpecimenService = animalSpecimenService;
-            animalSpecimenService.CollectionNamespace = "animal-specimens";
         }
 
         [HttpGet]

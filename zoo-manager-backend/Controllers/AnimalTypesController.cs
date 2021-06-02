@@ -19,13 +19,8 @@ namespace zoo_manager_backend.Controllers {
 
         public AnimalTypesController(MongoService<AnimalSpecimen> animalSpecimenService, MongoService<AnimalType> animalTypeService, MongoService<FoodAssociation> foodAssociationService) {
             this.animalSpecimenService = animalSpecimenService;
-            animalSpecimenService.CollectionNamespace = "animal-specimens";
-
             this.animalTypeService = animalTypeService;
-            animalTypeService.CollectionNamespace = "animal-types";
-
             this.foodAssociationService = foodAssociationService;
-            foodAssociationService.CollectionNamespace = "food-associations";
         }
 
         [HttpGet]

@@ -1,28 +1,31 @@
 ﻿using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text.RegularExpressions;
 using zoo_manager_backend.Models;
 
 namespace zoo_manager_backend.Services {
     public class MongoService<T> where T : MongoModel {
         private readonly IMongoDatabase database;
         private IMongoCollection<T> collection;
-        private string collectionNamespace = "default";
+        private string collectionName = "default";
 
-        public string CollectionNamespace {
+        public string CollectionName {
             get {
-                return collectionNamespace;
+                return collectionName;
             }
 
             set {
-                collectionNamespace = value;
-                collection = database.GetCollection<T>(collectionNamespace);
+                collectionName = value;
+                collection = database.GetCollection<T>(collectionName);
             }
         }
 
         public MongoService(MongoClient client) {
             database = client.GetDatabase("db");
+            collectionName = string.Join('-', Regex.Matches(typeof(T).Name, @"[A-Z][a-z]*|[a-z]+|\d+")).ToLower();
+
+            System.Diagnostics.Debug.WriteLine($"Generated collection name '{collectionName}' from service type '{typeof(T).Name}'");
         }
 
         public int GetAvailableId() {

@@ -18,10 +18,7 @@ namespace zoo_manager_backend.Controllers {
 
         public CategoriesController(MongoService<Category> categoryService, MongoService<AnimalType> animalTypeService) {
             this.categoryService = categoryService;
-            categoryService.CollectionNamespace = "categories";
-
             this.animalTypeService = animalTypeService;
-            animalTypeService.CollectionNamespace = "animal-types";
         }
 
         [HttpGet]

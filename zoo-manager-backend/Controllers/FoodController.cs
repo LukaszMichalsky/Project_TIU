@@ -18,10 +18,7 @@ namespace zoo_manager_backend.Controllers {
 
         public FoodController(MongoService<Food> foodService, MongoService<FoodAssociation> foodAssociationService) {
             this.foodService = foodService;
-            foodService.CollectionNamespace = "food";
-
             this.foodAssociationService = foodAssociationService;
-            foodAssociationService.CollectionNamespace = "food-associations";
         }
 
         [HttpGet]
