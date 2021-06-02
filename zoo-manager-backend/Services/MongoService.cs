@@ -23,9 +23,9 @@ namespace zoo_manager_backend.Services {
 
         public MongoService(MongoClient client) {
             database = client.GetDatabase("db");
-            collectionName = string.Join('-', Regex.Matches(typeof(T).Name, @"[A-Z][a-z]*|[a-z]+|\d+")).ToLower();
+            CollectionName = string.Join('-', Regex.Matches(typeof(T).Name, @"[A-Z][a-z]*|[a-z]+|\d+")).ToLower();
 
-            System.Diagnostics.Debug.WriteLine($"Generated collection name '{collectionName}' from service type '{typeof(T).Name}'");
+            System.Diagnostics.Debug.WriteLine($"Generated collection name '{CollectionName}' from service type '{typeof(T).Name}'");
         }
 
         public int GetAvailableId() {
