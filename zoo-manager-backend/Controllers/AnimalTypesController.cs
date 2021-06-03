@@ -15,11 +15,13 @@ namespace zoo_manager_backend.Controllers {
     public class AnimalTypesController : ControllerBase {
         private readonly MongoService<AnimalSpecimen> animalSpecimenService;
         private readonly MongoService<AnimalType> animalTypeService;
+        private readonly MongoService<Category> categoryService;
         private readonly MongoService<FoodAssociation> foodAssociationService;
 
-        public AnimalTypesController(MongoService<AnimalSpecimen> animalSpecimenService, MongoService<AnimalType> animalTypeService, MongoService<FoodAssociation> foodAssociationService) {
+        public AnimalTypesController(MongoService<AnimalSpecimen> animalSpecimenService, MongoService<AnimalType> animalTypeService, MongoService<Category> categoryService, MongoService<FoodAssociation> foodAssociationService) {
             this.animalSpecimenService = animalSpecimenService;
             this.animalTypeService = animalTypeService;
+            this.categoryService = categoryService;
             this.foodAssociationService = foodAssociationService;
         }
 
@@ -44,6 +46,13 @@ namespace zoo_manager_backend.Controllers {
         [HttpPost]
         public IActionResult AddAnimalType([FromBody] AnimalType newAnimalType) {
             int availableIndex = animalTypeService.GetAvailableId();
+
+            // Ensure added category exists
+            try {
+                Category addedCategory = categoryService.Find(new FilterDefinitionBuilder<Category>().Where(category => category.Id == newAnimalType.TypeCategoryId)).Single();
+            } catch {
+                return BadRequest("Selected category not exists");
+            }
 
             // Return added animal type
             return Ok(animalTypeService.InsertOne(new AnimalType() {

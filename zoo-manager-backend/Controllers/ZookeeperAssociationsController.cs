@@ -13,9 +13,13 @@ namespace zoo_manager_backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ZookeeperAssociationsController : ControllerBase {
+        private readonly MongoService<AnimalType> animalTypeService;
+        private readonly MongoService<Zookeeper> zookeeperService;
         private readonly MongoService<ZookeeperAssociation> zookeeperAssociationService;
 
-        public ZookeeperAssociationsController(MongoService<ZookeeperAssociation> zookeeperAssociationService) {
+        public ZookeeperAssociationsController(MongoService<AnimalType> animalTypeService, MongoService<Zookeeper> zookeeperService, MongoService<ZookeeperAssociation> zookeeperAssociationService) {
+            this.animalTypeService = animalTypeService;
+            this.zookeeperService = zookeeperService;
             this.zookeeperAssociationService = zookeeperAssociationService;
         }
 
@@ -40,6 +44,30 @@ namespace zoo_manager_backend.Controllers {
         [HttpPost]
         public IActionResult AddZookeeperAssociation([FromBody] ZookeeperAssociation newZookeeperAssociation) {
             int availableIndex = zookeeperAssociationService.GetAvailableId();
+
+            // Ensure added animal type exists
+            try {
+                AnimalType addedType = animalTypeService.Find(new FilterDefinitionBuilder<AnimalType>().Where(type => type.Id == newZookeeperAssociation.AnimalTypeId)).Single();
+            } catch {
+                return BadRequest("Selected animal type not exists");
+            }
+
+            // Ensure added zookeeper exists
+            try {
+                Zookeeper addedZookeeper = zookeeperService.Find(new FilterDefinitionBuilder<Zookeeper>().Where(zookeeper => zookeeper.Id == newZookeeperAssociation.TypeZookeeperId)).Single();
+            } catch {
+                return BadRequest("Selected zookeeper not exists");
+            }
+
+            // Find potential duplications
+            ZookeeperAssociation selectedAssociation = zookeeperAssociationService.Find(new FilterDefinitionBuilder<ZookeeperAssociation>().And(
+                new FilterDefinitionBuilder<ZookeeperAssociation>().Where(association => association.AnimalTypeId == newZookeeperAssociation.AnimalTypeId),
+                new FilterDefinitionBuilder<ZookeeperAssociation>().Where(association => association.TypeZookeeperId == newZookeeperAssociation.TypeZookeeperId)
+            )).SingleOrDefault();
+
+            if (selectedAssociation != null) {
+                return BadRequest("Zookeeper association duplicate found");
+            }
 
             // Return added zookeeper association
             return Ok(zookeeperAssociationService.InsertOne(new ZookeeperAssociation() {
