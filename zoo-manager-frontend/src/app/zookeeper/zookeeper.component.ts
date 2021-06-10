@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-zookeeper',
-  template: `
-    <p>
-      zookeeper works!
-    </p>
-  `,
+  templateUrl: './zookeeper.component.html',
   styles: [
   ]
 })

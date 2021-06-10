@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-animaltype',
-  template: `
-    <p>
-      animaltype works!
-    </p>
-  `,
+  templateUrl: './animaltype.component.html',
   styles: [
   ]
 })
