@@ -35,7 +35,7 @@ namespace zoo_manager_backend.Controllers {
                 return Ok(animalSpecimenService.Find(new FilterDefinitionBuilder<AnimalSpecimen>().Where(specimen => specimen.Id == id)).Single());
             } catch {
                 // Return empty object
-                return Ok(new object {});
+                return NotFound(new object {});
             }
         }
 

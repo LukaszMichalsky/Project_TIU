@@ -55,6 +55,8 @@ namespace zoo_manager_tests
             Assert.NotNull(okResult);
             var okObjectResult = Assert.IsType<OkObjectResult>(okResult);
 
+     
+
             var model = okObjectResult.Value as List<AnimalSpecimen>;
             Assert.NotNull(model);
 
@@ -66,7 +68,21 @@ namespace zoo_manager_tests
         [Fact]
         public void GetAllAnimalSpecimensWithId_CallActionWithValid_GetAnimalSpecimensById()
         {
-            
+            int id = 1;
+            AnimalSpecimen animalSpecimen = new AnimalSpecimen { AnimalName = "Lion", Id = 1 };
+
+            animalSpecimenMock.Setup(repo => repo.Find(It.IsAny<FilterDefinition<AnimalSpecimen>>(), null))
+                .Returns(new List<AnimalSpecimen> { new AnimalSpecimen { AnimalName = "Lion", Id = 1 }});
+
+            var okResult = _controller.GetSingleAnimalSpecimen(id);
+            Assert.NotNull(okResult);
+            var okObjectResult = Assert.IsType<OkObjectResult>(okResult);
+           
+
+
+            var animalSpecimensResult = Assert.IsType<AnimalSpecimen>(okObjectResult.Value);
+            Assert.Equal(animalSpecimen, animalSpecimensResult);
+
         }
         [Fact]
         public void GetAllAnimalSpecimensWithId_CallActionWithInvalid_GetAnimalSpecimensById()
