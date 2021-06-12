@@ -36,7 +36,7 @@ namespace zoo_manager_backend.Services {
             }
         }
 
-        public List<T> Find(FilterDefinition<T> filter, FindOptions options = null) {
+        virtual public List<T> Find(FilterDefinition<T> filter, FindOptions options = null) {
             return collection.Find(filter, options).ToList();
         }
 
