@@ -20,7 +20,7 @@ namespace zoo_manager_backend.Models
             if (obj is AnimalSpecimen)
             {
                 var that = obj as AnimalSpecimen;
-                return this.Id == that.Id && this.AnimalName == that.AnimalName;
+                return this.Id == that.Id && this.AnimalName == that.AnimalName && this.TypeId == that.TypeId;
             }
 
             return false;

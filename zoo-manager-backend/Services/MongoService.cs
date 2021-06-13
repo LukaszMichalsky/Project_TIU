@@ -40,7 +40,7 @@ namespace zoo_manager_backend.Services {
             return collection.Find(filter, options).ToList();
         }
 
-        public T InsertOne(T newElement) {
+        virtual public T InsertOne(T newElement) {
             try {
                 collection.InsertOne(newElement);
                 return newElement;
