@@ -144,15 +144,77 @@ namespace zoo_manager_tests
             AnimalSpecimen animalSpecimen = new AnimalSpecimen { AnimalName = "Lion", Id = 1, TypeId = 3 };
 
             animalTypeMock.Setup(repo => repo.Find(It.IsAny<FilterDefinition<AnimalType>>(), null))
-                .Returns(new List<AnimalType> {  });
+                .Returns(new List<AnimalType> { });
+
+
 
 
             var okResult = _controller.AddAnimalSpecimen(animalSpecimen);
             Assert.NotNull(okResult);
             var okObjectResult = Assert.IsType<BadRequestObjectResult>(okResult);
-             
+
 
         }
+
+        [Fact]
+        public void AddAnimalSpecimen_CallWithExistingAnimal_ReturnedBadRequest() //TODO
+        {
+            AnimalSpecimen animalSpecimen = new AnimalSpecimen { AnimalName = "Lion", Id = 1, TypeId = 2 };
+
+            animalTypeMock.Setup(repo => repo.Find(It.IsAny<FilterDefinition<AnimalType>>(), null))
+                .Returns(new List<AnimalType> { new AnimalType { Id = 2, TypeCategoryId = 3, TypeName = "TestName" } });
+
+            animalSpecimenMock.Setup(repo => repo.InsertOne(It.IsAny<AnimalSpecimen>()))
+              .Returns(new AnimalSpecimen { });
+
+            var okResult = _controller.AddAnimalSpecimen(animalSpecimen);
+            Assert.NotNull(okResult);
+            var okObjectResult = Assert.IsType<BadRequestObjectResult>(okResult);
+
+
+        }
+
+        [Fact]
+        public void DeleteAnimalSpecimen_CallForExistingAnimal_ReturnOkObject()
+        {
+            int id = 1;
+            AnimalSpecimen animalSpecimen = new AnimalSpecimen { AnimalName = "Lion", Id = 1, TypeId = 2 };
+
+            animalSpecimenMock.Setup(repo => repo.Find(It.IsAny<FilterDefinition<AnimalSpecimen>>(), null))
+                .Returns(new List<AnimalSpecimen> { new AnimalSpecimen { AnimalName = "Lion", Id = 1, TypeId = 2 } });
+
+            animalSpecimenMock.Setup(repo => repo.FindOneAndDelete(It.IsAny<FilterDefinition<AnimalSpecimen>>(), null))
+              .Returns(new AnimalSpecimen { Id = 1, AnimalName = "Lion", TypeId = 2 });
+
+            var okResult = _controller.DeleteAnimalSpecimen(id);
+            Assert.NotNull(okResult);
+            var okObjectResult = Assert.IsType<OkObjectResult>(okResult);
+
+            var animalSpecimensResult = Assert.IsType<AnimalSpecimen>(okObjectResult.Value);
+            Assert.Equal(animalSpecimen, animalSpecimensResult);
+
+        }
+
+        [Fact]
+        public void DeleteAnimalSpecimen_CallForNonExistingAnimal_ReturnBadRequest() //TODO
+        {
+            int id = 1;
+            AnimalSpecimen animalSpecimen = new AnimalSpecimen { AnimalName = "Lion", Id = 1, TypeId = 2 };
+
+            animalSpecimenMock.Setup(repo => repo.Find(It.IsAny<FilterDefinition<AnimalSpecimen>>(), null))
+                .Returns(new List<AnimalSpecimen> {});
+
+            var okResult = _controller.DeleteAnimalSpecimen(id);
+            Assert.NotNull(okResult);
+            var okObjectResult = Assert.IsType<BadRequestObjectResult>(okResult);
+
+        
+
+
+        }
+
+
+
 
 
 

@@ -38,7 +38,7 @@ namespace zoo_manager_backend.Services {
 
         virtual public List<T> Find(FilterDefinition<T> filter, FindOptions options = null) {
             return collection.Find(filter, options).ToList();
-        }
+        }                                            
 
         virtual public T InsertOne(T newElement) {
             try {
@@ -49,7 +49,7 @@ namespace zoo_manager_backend.Services {
             }
         }
 
-        public T FindOneAndDelete(FilterDefinition<T> filter, FindOneAndDeleteOptions<T, T> options = null) {
+        virtual public T FindOneAndDelete(FilterDefinition<T> filter, FindOneAndDeleteOptions<T, T> options = null) {
             return collection.FindOneAndDelete(filter, options);
         }
     }
