@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
 using zoo_manager_backend.Services;
+using zoo_manager_backend.Repositories;
 using zoo_manager_backend.Models;
 
 namespace zoo_manager_backend {
@@ -28,13 +29,13 @@ namespace zoo_manager_backend {
 
             services.AddSingleton(new MongoClient(Config.DB_CONNECTION_STRING));
 
-            services.AddSingleton<MongoService<AnimalSpecimen>>();
-            services.AddSingleton<MongoService<AnimalType>>();
-            services.AddSingleton<MongoService<Category>>();
-            services.AddSingleton<MongoService<Food>>();
-            services.AddSingleton<MongoService<FoodAssociation>>();
-            services.AddSingleton<MongoService<Zookeeper>>();
-            services.AddSingleton<MongoService<ZookeeperAssociation>>();
+            services.AddSingleton<MongoRepository<AnimalSpecimen>>();       services.AddSingleton<AnimalSpecimenService>();
+            services.AddSingleton<MongoRepository<AnimalType>>();           services.AddSingleton<AnimalTypeService>();
+            services.AddSingleton<MongoRepository<Category>>();             services.AddSingleton<CategoryService>();
+            services.AddSingleton<MongoRepository<Food>>();                 services.AddSingleton<FoodService>();
+            services.AddSingleton<MongoRepository<FoodAssociation>>();      services.AddSingleton<FoodAssociationService>();
+            services.AddSingleton<MongoRepository<Zookeeper>>();            services.AddSingleton<ZookeeperService>();
+            services.AddSingleton<MongoRepository<ZookeeperAssociation>>(); services.AddSingleton<ZookeeperAssociationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
