@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -202,13 +203,13 @@ namespace zoo_manager_tests
             AnimalSpecimen animalSpecimen = new AnimalSpecimen { AnimalName = "Lion", Id = 1, TypeId = 2 };
 
             animalSpecimenMock.Setup(repo => repo.Find(It.IsAny<FilterDefinition<AnimalSpecimen>>(), null))
-                .Returns(new List<AnimalSpecimen> {});
+                .Returns(new List<AnimalSpecimen> { });
 
             var okResult = _controller.DeleteAnimalSpecimen(id);
             Assert.NotNull(okResult);
             var okObjectResult = Assert.IsType<BadRequestObjectResult>(okResult);
 
-        
+
 
 
         }
@@ -221,3 +222,4 @@ namespace zoo_manager_tests
     }
 
 }
+*/
