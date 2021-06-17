@@ -8,9 +8,9 @@ namespace zoo_manager_backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class AnimalSpecimenController : ControllerBase {
-        private readonly AnimalSpecimenService animalSpecimenService;
+        private readonly IAnimalSpecimenService animalSpecimenService;
 
-        public AnimalSpecimenController(AnimalSpecimenService animalSpecimenService) {
+        public AnimalSpecimenController(IAnimalSpecimenService animalSpecimenService) {
             this.animalSpecimenService = animalSpecimenService;
         }
 

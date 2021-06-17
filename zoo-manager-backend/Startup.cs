@@ -29,13 +29,13 @@ namespace zoo_manager_backend {
 
             services.AddSingleton(new MongoClient(Config.DB_CONNECTION_STRING));
 
-            services.AddSingleton<MongoRepository<AnimalSpecimen>>();       services.AddSingleton<AnimalSpecimenService>();
-            services.AddSingleton<MongoRepository<AnimalType>>();           services.AddSingleton<AnimalTypeService>();
-            services.AddSingleton<MongoRepository<Category>>();             services.AddSingleton<CategoryService>();
-            services.AddSingleton<MongoRepository<Food>>();                 services.AddSingleton<FoodService>();
-            services.AddSingleton<MongoRepository<FoodAssociation>>();      services.AddSingleton<FoodAssociationService>();
-            services.AddSingleton<MongoRepository<Zookeeper>>();            services.AddSingleton<ZookeeperService>();
-            services.AddSingleton<MongoRepository<ZookeeperAssociation>>(); services.AddSingleton<ZookeeperAssociationService>();
+            services.AddSingleton<MongoRepository<AnimalSpecimen>>();       services.AddSingleton<IAnimalSpecimenService, AnimalSpecimenService>();
+            services.AddSingleton<MongoRepository<AnimalType>>();           services.AddSingleton<IAnimalTypeService, AnimalTypeService>();
+            services.AddSingleton<MongoRepository<Category>>();             services.AddSingleton<ICategoryService, CategoryService>();
+            services.AddSingleton<MongoRepository<Food>>();                 services.AddSingleton<IFoodService, FoodService>();
+            services.AddSingleton<MongoRepository<FoodAssociation>>();      services.AddSingleton<IFoodAssociationService, FoodAssociationService>();
+            services.AddSingleton<MongoRepository<Zookeeper>>();            services.AddSingleton<IZookeeperService, ZookeeperService>();
+            services.AddSingleton<MongoRepository<ZookeeperAssociation>>(); services.AddSingleton<IZookeeperAssociationService, ZookeeperAssociationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

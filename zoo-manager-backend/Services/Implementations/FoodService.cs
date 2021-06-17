@@ -7,7 +7,7 @@ using zoo_manager_backend.Models;
 using zoo_manager_backend.Repositories;
 
 namespace zoo_manager_backend.Services {
-    public class FoodService {
+    public class FoodService : IFoodService {
         private readonly MongoRepository<Food> foodRepository;
         private readonly MongoRepository<FoodAssociation> foodAssociationRepository;
 

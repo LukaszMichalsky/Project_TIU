@@ -7,7 +7,7 @@ using zoo_manager_backend.Models;
 using zoo_manager_backend.Repositories;
 
 namespace zoo_manager_backend.Services {
-    public class ZookeeperService {
+    public class ZookeeperService : IZookeeperService {
         private readonly MongoRepository<Zookeeper> zookeeperRepository;
         private readonly MongoRepository<ZookeeperAssociation> zookeeperAssociationsRepository;
 

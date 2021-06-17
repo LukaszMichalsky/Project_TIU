@@ -7,7 +7,7 @@ using zoo_manager_backend.Models;
 using zoo_manager_backend.Repositories;
 
 namespace zoo_manager_backend.Services {
-    public class CategoryService {
+    public class CategoryService : ICategoryService {
         private readonly MongoRepository<AnimalType> animalTypeRepository;
         private readonly MongoRepository<Category> categoryRepository;
 
