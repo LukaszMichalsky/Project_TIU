@@ -10,7 +10,7 @@ import { Category } from 'src/models/category';
 export class CategoryService {
   constructor(private http: HttpClient) {}
 
-  public getCategories(): Observable<Category[]> {
+  public get(): Observable<Category[]> {
     return this.http.get<Category[]>(Config.getURL("Category"));
   }
 }

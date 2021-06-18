@@ -10,7 +10,7 @@ import { AnimalType } from 'src/models/animaltype';
 export class AnimaltypeService {
   constructor(private http: HttpClient) {}
 
-  public getAnimalTypes(): Observable<AnimalType[]> {
+  public get(): Observable<AnimalType[]> {
     return this.http.get<AnimalType[]>(Config.getURL("AnimalType"));
   }
 }

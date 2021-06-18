@@ -1,3 +1,27 @@
 <div class="container">
-Zookeper works!
+  <table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th>Zookeeper ID</th>
+        <th>Zookeeper name</th>
+        <th>Zookeeper surname</th>
+        <th>Zookeeper phone number</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="zookeepers.length == 0">
+      <tr>
+        <td class="table-secondary text-center" colspan="4"><i>No zookeepers found</i></td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="zookeepers.length > 0">
+      <tr *ngFor="let zookeeper of zookeepers" class="table-secondary">
+        <td>{{zookeeper.id}}</td>
+        <td>{{zookeeper.zookeeperName}}</td>
+        <td>{{zookeeper.zookeeperSurname}}</td>
+        <td>{{zookeeper.zookeeperPhoneNumber}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

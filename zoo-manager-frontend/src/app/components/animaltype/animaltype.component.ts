@@ -14,7 +14,7 @@ export class AnimaltypeComponent implements OnInit {
   constructor(private animalTypeService: AnimaltypeService) {}
 
   ngOnInit(): void {
-    this.animalTypeService.getAnimalTypes().subscribe((animalTypes) => {
+    this.animalTypeService.get().subscribe((animalTypes) => {
       this.animalTypes = animalTypes;
     });
   }

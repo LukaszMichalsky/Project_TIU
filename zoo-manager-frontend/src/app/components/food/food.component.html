@@ -1,3 +1,27 @@
 <div class="container">
-    Food works!
-</div>
+    <table class="table">
+      <thead>
+        <tr class="table-dark">
+          <th>Food item ID</th>
+          <th>Name</th>
+          <th>Buy price</th>
+          <th>Storage quantity</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="foods.length == 0">
+        <tr>
+          <td class="table-secondary text-center" colspan="2"><i>No categories found</i></td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="foods.length > 0">
+        <tr *ngFor="let food of foods" class="table-secondary">
+          <td>{{food.id}}</td>
+          <td>{{food.foodName}}</td>
+          <td>{{food.foodBuyPrice}}</td>
+          <td>{{food.foodStorageQuantity}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

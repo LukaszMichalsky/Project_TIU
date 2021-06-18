@@ -1,32 +1,37 @@
 <div class="d-flex">
-  <button class=" btn bg-success border border-dark px-5" style="margin-top: 1%;margin-left: 1%; height:min-content; ">
+  <button class="btn btn-dark m-3 border border-light" routerLink="">
     Menu
   </button>
 
-  <h1 class=" text-center " style="margin-top: 3%; margin:0 auto; height:min-content;">ZOO Manager Project</h1>
+  <h1 class="text-center" style="margin-top: 3%; margin:0 auto; height:min-content;">ZOO Manager Project</h1>
 
   <div></div>
 </div>
 
-<nav class="position-absolute" style="background-color: seagreen;">
+<nav class="position-absolute">
   <ul class="navbar-nav mr-auto">
-    <li routerLink="">
-      Main page
-    </li>
     <li class="nav-item" routerLink="animaltype">
-      Animal Types
+      <div class="btn btn-primary border border-dark m-2 menu-button">
+        Animal Types
+      </div>
     </li>
 
     <li class="nav-item" routerLink="category">
-      Animal Categories
+      <div class="btn btn-primary border border-dark m-2 menu-button">
+        Animal Categories
+      </div>
     </li>
 
     <li class="nav-item" routerLink="zookeeper">
-      Zookeepers
+      <div class="btn btn-primary border border-dark m-2 menu-button">
+        Zookeepers
+      </div>
     </li>
 
     <li class="nav-item" routerLink="food">
-      Foods
+      <div class="btn btn-primary border border-dark m-2 menu-button">
+        Food items
+      </div>
     </li>
   </ul>
 </nav>
