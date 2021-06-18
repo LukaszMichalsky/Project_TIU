@@ -26,11 +26,6 @@ namespace zoo_manager_backend {
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "zoo_manager_backend", Version = "v1" });
             });
-            services.AddCors(options => {
-                options.AddDefaultPolicy(builder => {
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().Build();
-                });
-            });
 
             services.AddSingleton(new MongoClient(Config.DB_CONNECTION_STRING));
 
@@ -53,7 +48,11 @@ namespace zoo_manager_backend {
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors();
+
+            app.UseCors(builder => {
+                builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().Build();
+            });
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {
