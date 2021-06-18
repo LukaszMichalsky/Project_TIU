@@ -1,0 +1,25 @@
+<div class="container">
+    <table class="table">
+      <thead>
+        <tr class="table-dark">
+          <th>Animal type ID</th>
+          <th>Animal type name</th>
+          <th>Parent category ID</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="animalTypes.length == 0">
+        <tr>
+          <td class="table-secondary text-center" colspan="4"><i>No animal types found</i></td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="animalTypes.length > 0">
+        <tr *ngFor="let animalType of animalTypes" class="table-secondary">
+          <td>{{animalType.id}}</td>
+          <td>{{animalType.typeName}}</td>
+          <td>{{animalType.typeCategoryId}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,23 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th>Category ID</th>
+        <th>Category name</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="categories.length == 0">
+      <tr>
+        <td class="table-secondary text-center" colspan="2"><i>No categories found</i></td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="categories.length > 0">
+      <tr *ngFor="let category of categories" class="table-secondary">
+        <td>{{category.id}}</td>
+        <td>{{category.categoryName}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
