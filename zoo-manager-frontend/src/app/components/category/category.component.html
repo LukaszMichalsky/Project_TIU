@@ -1,9 +1,43 @@
 <div class="container">
   <table class="table">
     <thead>
+      <tr class="bg-info">
+        <th>Type ID</th>
+        <th>Type name</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="selectedCategoryTypes === null">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>Select category to show its types...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedCategoryTypes !== null && selectedCategoryTypes.length === 0">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>No types found...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedCategoryTypes !== null && selectedCategoryTypes.length > 0">
+      <tr *ngFor="let type of selectedCategoryTypes" class="table-info">
+        <td>{{type.id}}</td>
+        <td>{{type.typeName}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
       <tr class="table-dark">
         <th>Category ID</th>
         <th>Category name</th>
+
+        <th></th>
       </tr>
     </thead>
 
@@ -17,6 +51,11 @@
       <tr *ngFor="let category of categories" class="table-secondary">
         <td>{{category.id}}</td>
         <td>{{category.categoryName}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="showTypes(category.id)" [disabled]="category.typesCount === 0" class="btn btn-dark btn-sm m-1"w>Show categorized animal types ({{category.typesCount}})</button>
+          <button [disabled]="category.typesCount > 0" class="btn btn-danger btn-sm m-1">Delete category</button>
+        </td>
       </tr>
     </tbody>
   </table>
