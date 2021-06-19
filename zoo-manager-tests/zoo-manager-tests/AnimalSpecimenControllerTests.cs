@@ -21,13 +21,13 @@ using zoo_manager_backend.Repositories;
 namespace zoo_manager_tests
 {
 
-    public class AnimalSpecimenControllerTest
+    public class AnimalSpecimenControllerTests
     {
         private readonly Mock<IAnimalSpecimenService> animalSpecimenServiceMock;
         private readonly AnimalSpecimenController _controller;
 
 
-        public AnimalSpecimenControllerTest()
+        public AnimalSpecimenControllerTests()
         {
             animalSpecimenServiceMock = new Mock<IAnimalSpecimenService>();
             _controller = new AnimalSpecimenController(animalSpecimenServiceMock.Object);

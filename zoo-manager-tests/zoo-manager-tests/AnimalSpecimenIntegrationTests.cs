@@ -20,14 +20,14 @@ using zoo_manager_backend.Repositories;
 
 namespace zoo_manager_tests
 {
-    public class AnimalSpecimensSerivceTests
+    public class AnimalSpecimensIntegrationTests
     {
         private readonly Mock<AnimalSpecimenService> animalSpecimenMock;
         private readonly Mock<AnimalTypeService> animalTypeMock;
         private readonly Mock<MongoRepository<AnimalSpecimen>> animalSpecimenRepositoryMock;
         private readonly Mock<MongoRepository<AnimalType>> animalTypeRepositoryMock;
         private readonly AnimalSpecimenController _controller;
-        public AnimalSpecimensSerivceTests()
+        public AnimalSpecimensIntegrationTests()
         {
             animalSpecimenRepositoryMock = new Mock<MongoRepository<AnimalSpecimen>>(new MongoClient(Config.DB_CONNECTION_STRING));
             animalTypeRepositoryMock = new Mock<MongoRepository<AnimalType>>(new MongoClient(Config.DB_CONNECTION_STRING));
@@ -160,7 +160,7 @@ namespace zoo_manager_tests
             AnimalSpecimen animalSpecimen = new AnimalSpecimen { AnimalName = "Lion", Id = 1, TypeId = 2 };
 
             animalSpecimenRepositoryMock.Setup(repo => repo.FindOneAndDelete(It.IsAny<FilterDefinition<AnimalSpecimen>>(), null))
-                .Returns((AnimalSpecimen) null);
+                .Returns((AnimalSpecimen)null);
 
             var isItemNotFoundException = Assert.Throws<ItemNotFoundException>(() => animalSpecimenMock.Object.Delete(id));
 
