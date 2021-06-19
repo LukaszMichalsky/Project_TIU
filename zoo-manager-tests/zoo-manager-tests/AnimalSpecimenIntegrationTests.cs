@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 using zoo_manager_backend.Controllers;
@@ -14,8 +10,7 @@ using Moq;
 using Xunit;
 using MongoDB.Driver;
 using zoo_manager_backend;
-using Xunit.Abstractions;
-using Xunit.Sdk;
+
 using zoo_manager_backend.Repositories;
 
 namespace zoo_manager_tests
