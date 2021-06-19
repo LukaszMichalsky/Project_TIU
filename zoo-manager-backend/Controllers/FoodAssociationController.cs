@@ -8,9 +8,9 @@ namespace zoo_manager_backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class FoodAssociationController : ControllerBase {
-        private readonly FoodAssociationService foodAssociationService;
+        private readonly IFoodAssociationService foodAssociationService;
 
-        public FoodAssociationController(FoodAssociationService foodAssociationService) {
+        public FoodAssociationController(IFoodAssociationService foodAssociationService) {
             this.foodAssociationService = foodAssociationService;
         }
 

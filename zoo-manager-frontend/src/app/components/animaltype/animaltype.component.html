@@ -1,0 +1,74 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr class="bg-info">
+        <th>Specimen ID</th>
+        <th>Specimen name</th>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="selectedTypeSpecimens === null">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>Select animal type to show its specimens...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedTypeSpecimens !== null && selectedTypeSpecimens.length === 0">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>No animals found...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedTypeSpecimens !== null && selectedTypeSpecimens.length > 0">
+      <tr *ngFor="let specimen of selectedTypeSpecimens" class="table-info">
+        <td>{{specimen.id}}</td>
+        <td>{{specimen.animalName}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button class="btn btn-danger btn-sm">Delete specimen</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th>Animal type ID</th>
+        <th>Animal type name</th>
+        <th>Parent category ID</th>
+        <th>Parent category name</th>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="animalTypes.length == 0">
+      <tr>
+        <td class="table-secondary text-center" colspan="4">
+          <i>No animal types found</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="animalTypes.length > 0">
+      <tr *ngFor="let animalType of animalTypes" class="table-secondary">
+        <td>{{animalType.id}}</td>
+        <td>{{animalType.typeName}}</td>
+        <td>{{animalType.typeCategoryId}}</td>
+        <td>{{animalType.categoryName}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="showSpecimens(animalType.id)" [disabled]="animalType.specimensCount === 0" class="btn btn-dark btn-sm m-1">Show specimens ({{animalType.specimensCount}})</button>
+          <button [disabled]="animalType.specimensCount > 0" class="btn btn-danger btn-sm m-1">Delete type</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

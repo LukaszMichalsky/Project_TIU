@@ -1,28 +1,37 @@
-<header>
-  <button class="btn bg-success" > Menu</button>
-  <h1 class="text-center">ZOO Manager Project</h1>
-</header>
-<nav class="position-absolute" style="background-color: seagreen;">
-  <ul class="navbar-nav mr-auto">
-    <li routerLink="">
-      Main page
-    </li>
-    <li class="nav-item" routerLink="animaltype">
-      Animal Types
-    </li>
+<div class="container-fluid">
+  <div class="row bg-dark mb-3 border-bottom border-light">
+    <div class="col-auto">
+      <button class="btn btn-secondary m-3 border border-light menu-button" routerLink="">Menu</button>
+    </div>
 
-    <li class="nav-item" routerLink="category">
-      Animal Categories
-    </li>
+    <div class="col d-flex justify-content-center align-items-center">
+      <h1 class="text-center text-light">ZOO Manager Project</h1>
+    </div>
+  </div>
 
-    <li class="nav-item" routerLink="zookeeper">
-      Zookeepers
-    </li>
+  <div class="row">
+    <div class="col-auto">
+      <nav class="d-flex flex-column">
+        <button class="btn btn-primary border border-dark m-2 menu-button" routerLink="animaltype">
+          Animal types
+        </button>
 
-    <li class="nav-item" routerLink="food">
-      Foods
-    </li>
-  </ul>
-</nav>
+        <button class="btn btn-primary border border-dark m-2 menu-button" routerLink="category">
+          Animal categories
+        </button>
 
-<router-outlet></router-outlet>
+        <button class="btn btn-primary border border-dark m-2 menu-button" routerLink="zookeeper">
+          Zookeepers
+        </button>
+
+        <button class="btn btn-primary border border-dark m-2 menu-button" routerLink="food">
+          Food items
+        </button>
+      </nav>
+    </div>
+
+    <div class="col">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

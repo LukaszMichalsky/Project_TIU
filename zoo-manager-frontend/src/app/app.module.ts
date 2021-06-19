@@ -3,12 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CategoryComponent } from './category/category.component';
-import { AnimaltypeComponent } from './animaltype/animaltype.component';
-import { FoodComponent } from './food/food.component';
-import { FoodassociationComponent } from './foodassociation/foodassociation.component';
-import { ZookeeperComponent } from './zookeeper/zookeeper.component';
-import { ZookeeperassociationComponent } from './zookeeperassociation/zookeeperassociation.component';
+import { CategoryComponent } from './components/category/category.component';
+import { AnimaltypeComponent } from './components/animaltype/animaltype.component';
+import { FoodComponent } from './components/food/food.component';
+import { ZookeeperComponent } from './components/zookeeper/zookeeper.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,13 +15,12 @@ import { ZookeeperassociationComponent } from './zookeeperassociation/zookeepera
     CategoryComponent,
     AnimaltypeComponent,
     FoodComponent,
-    FoodassociationComponent,
-    ZookeeperComponent,
-    ZookeeperassociationComponent
+    ZookeeperComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
