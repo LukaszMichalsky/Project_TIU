@@ -1,6 +1,5 @@
-export interface FoodAssociation
-{
+export interface FoodAssociation {
     id: number;
     animalTypeId: number;
-    typeId: number;
+    foodId: number;
 }

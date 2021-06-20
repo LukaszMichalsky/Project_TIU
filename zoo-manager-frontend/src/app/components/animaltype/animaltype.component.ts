@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimalSpecimenService } from 'src/app/services/animalspecimen.service';
-import { AnimaltypeService } from 'src/app/services/animaltype.service';
+import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { AnimalSpecimen } from 'src/models/animalspecimen';
 import { AnimalTypeViewModel } from 'src/viewmodels/animaltype';
@@ -12,12 +12,12 @@ import { Category } from 'src/models/category';
   styles: [
   ]
 })
-export class AnimaltypeComponent implements OnInit {
+export class AnimalTypeComponent implements OnInit {
   animalTypes: AnimalTypeViewModel[] = [];
   animalSpecimens: AnimalSpecimen[] = [];
   selectedTypeSpecimens: AnimalSpecimen[] | null = null;
 
-  constructor(private animalTypeService: AnimaltypeService, private categoryService: CategoryService, private animalSpecimenService: AnimalSpecimenService) {}
+  constructor(private animalTypeService: AnimalTypeService, private categoryService: CategoryService, private animalSpecimenService: AnimalSpecimenService) {}
 
   private loadData(): void {
     this.animalTypeService.get().subscribe(animalTypes => {

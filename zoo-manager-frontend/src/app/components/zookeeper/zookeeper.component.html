@@ -1,11 +1,45 @@
 <div class="container">
   <table class="table">
     <thead>
+      <tr class="bg-info">
+        <th>Type ID</th>
+        <th>Type name</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="selectedZookeeperTypes === null">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>Select zookeeper to show associated animal types...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedZookeeperTypes !== null && selectedZookeeperTypes.length === 0">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>No animal types found...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedZookeeperTypes !== null && selectedZookeeperTypes.length > 0">
+      <tr *ngFor="let type of selectedZookeeperTypes" class="table-info">
+        <td>{{type.id}}</td>
+        <td>{{type.typeName}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
       <tr class="table-dark">
         <th>Zookeeper ID</th>
         <th>Zookeeper name</th>
         <th>Zookeeper surname</th>
         <th>Zookeeper phone number</th>
+
+        <th></th>
       </tr>
     </thead>
 
@@ -21,6 +55,11 @@
         <td>{{zookeeper.zookeeperName}}</td>
         <td>{{zookeeper.zookeeperSurname}}</td>
         <td>{{zookeeper.zookeeperPhoneNumber}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="showTypes(zookeeper.id)" [disabled]="zookeeper.typesCount === 0" class="btn btn-dark btn-sm m-1">Show associated animal types ({{zookeeper.typesCount}})</button>
+          <button [disabled]="zookeeper.typesCount > 0" class="btn btn-danger btn-sm m-1">Delete zookeeper</button>
+        </td>
       </tr>
     </tbody>
   </table>

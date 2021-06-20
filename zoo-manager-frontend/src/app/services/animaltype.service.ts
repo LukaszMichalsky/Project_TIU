@@ -7,7 +7,7 @@ import { AnimalType } from 'src/models/animaltype';
 @Injectable({
   providedIn: 'root'
 })
-export class AnimaltypeService {
+export class AnimalTypeService {
   constructor(private http: HttpClient) {}
 
   public get(): Observable<AnimalType[]> {

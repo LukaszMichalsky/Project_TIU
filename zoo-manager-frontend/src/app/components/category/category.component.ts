@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimalSpecimenService } from 'src/app/services/animalspecimen.service';
-import { AnimaltypeService } from 'src/app/services/animaltype.service';
+import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { AnimalType } from 'src/models/animaltype';
 import { CategoryViewModel } from 'src/viewmodels/category';
@@ -16,24 +16,22 @@ export class CategoryComponent implements OnInit {
   categories: CategoryViewModel[] = [];
   selectedCategoryTypes: AnimalType[] | null = null;
 
-  constructor(private animalTypeService: AnimaltypeService, private animalSpecimenService: AnimalSpecimenService, private categoryService: CategoryService) {}
+  constructor(private animalTypeService: AnimalTypeService, private categoryService: CategoryService) {}
 
   private loadData(): void {
     this.categoryService.get().subscribe(categories => {
       this.animalTypeService.get().subscribe(animalTypes => {
-        this.animalSpecimenService.get().subscribe(animalSpecimens => {
-          this.animalTypes = animalTypes;
+        this.animalTypes = animalTypes;
 
-          this.categories = categories.map(category => {
-            return {
-              id: category.id,
-              categoryName: category.categoryName,
+        this.categories = categories.map(category => {
+          return {
+            id: category.id,
+            categoryName: category.categoryName,
 
-              typesCount: this.animalTypes.filter(animalType => {
-                return animalType.typeCategoryId === category.id
-              }).length
-            }
-          });
+            typesCount: this.animalTypes.filter(animalType => {
+              return animalType.typeCategoryId === category.id;
+            }).length
+          }
         });
       });
     });
