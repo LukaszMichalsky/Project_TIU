@@ -1,34 +1,66 @@
 <div class="container">
-    <table class="table">
-      <thead>
-        <tr class="table-dark">
-          <th>Food item ID</th>
-          <th>Name</th>
-          <th>Market buy price</th>
-          <th>Storage quantity</th>
+  <table class="table">
+    <thead>
+      <tr class="bg-info">
+        <th>Type ID</th>
+        <th>Type name</th>
+      </tr>
+    </thead>
 
-          <th></th>
-        </tr>
-      </thead>
+    <tbody *ngIf="selectedFoodItemTypes === null">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>Select food item to show associated animal types...</i>
+        </td>
+      </tr>
+    </tbody>
 
-      <tbody *ngIf="foodItems.length == 0">
-        <tr>
-          <td class="table-secondary text-center" colspan="4"><i>No food items found</i></td>
-        </tr>
-      </tbody>
+    <tbody *ngIf="selectedFoodItemTypes !== null && selectedFoodItemTypes.length === 0">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>No animal types found...</i>
+        </td>
+      </tr>
+    </tbody>
 
-      <tbody *ngIf="foodItems.length > 0">
-        <tr *ngFor="let food of foodItems" class="table-secondary">
-          <td>{{food.id}}</td>
-          <td>{{food.foodName}}</td>
-          <td>{{food.foodBuyPrice.toFixed(2)}} USD</td>
-          <td>{{food.foodStorageQuantity}}</td>
+    <tbody *ngIf="selectedFoodItemTypes !== null && selectedFoodItemTypes.length > 0">
+      <tr *ngFor="let type of selectedFoodItemTypes" class="table-info">
+        <td>{{type.id}}</td>
+        <td>{{type.typeName}}</td>
+      </tr>
+    </tbody>
+  </table>
 
-          <td class="d-flex justify-content-end">
-            <button [disabled]="food.typesCount === 0" class="btn btn-dark btn-sm m-1">Show associated animal types ({{food.typesCount}})</button>
-            <button [disabled]="food.typesCount > 0" class="btn btn-danger btn-sm m-1">Delete food item</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table class="table">
+    <thead>
+      <tr class="table-dark">
+        <th>Food item ID</th>
+        <th>Name</th>
+        <th>Market buy price</th>
+        <th>Storage quantity</th>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="foodItems.length == 0">
+      <tr>
+        <td class="table-secondary text-center" colspan="4"><i>No food items found</i></td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="foodItems.length > 0">
+      <tr *ngFor="let food of foodItems" class="table-secondary">
+        <td>{{food.id}}</td>
+        <td>{{food.foodName}}</td>
+        <td>{{food.foodBuyPrice.toFixed(2)}} USD</td>
+        <td>{{food.foodStorageQuantity}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="showTypes(food.id)" [disabled]="food.typesCount === 0" class="btn btn-dark btn-sm m-1">Show associated animal types ({{food.typesCount}})</button>
+          <button [disabled]="food.typesCount > 0" class="btn btn-danger btn-sm m-1">Delete food item</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

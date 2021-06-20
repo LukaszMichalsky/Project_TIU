@@ -16,7 +16,7 @@ export class FoodComponent implements OnInit {
   foodAssociations: FoodAssociation[] = [];
   foodItems: FoodViewModel[] = [];
   allAnimalTypes: AnimalType[] = [];
-  selectedFoodTypes: AnimalType[] | null = null;
+  selectedFoodItemTypes: AnimalType[] | null = null;
 
   constructor(private animalTypeService: AnimalTypeService, private foodAssociationService: FoodAssociationService, private foodService: FoodService) {}
 
@@ -46,5 +46,17 @@ export class FoodComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+  }
+
+  showTypes(foodItemID: number): void {
+    let associatedAnimalTypeIDs: number[] = this.foodAssociations.filter(association => {
+      return association.foodId === foodItemID;
+    }).map(association => {
+      return association.animalTypeId;
+    });
+
+    this.selectedFoodItemTypes = this.allAnimalTypes.filter(animalType => {
+      return associatedAnimalTypeIDs.includes(animalType.id);
+    });
   }
 }

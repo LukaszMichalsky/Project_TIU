@@ -6,10 +6,10 @@ import { FoodComponent } from './components/food/food.component';
 import { ZookeeperComponent } from './components/zookeeper/zookeeper.component';
 
 const routes: Routes = [
-  {path: "category", component: CategoryComponent},
-  {path: "zookeeper", component: ZookeeperComponent},
-  {path: "food", component: FoodComponent},
-  {path: "animaltype", component: AnimalTypeComponent}
+  { path: "category", component: CategoryComponent },
+  { path: "zookeeper", component: ZookeeperComponent },
+  { path: "food", component: FoodComponent },
+  { path: "animaltype", component: AnimalTypeComponent }
 ];
 
 @NgModule({
