@@ -8,6 +8,7 @@ import { AnimalTypeComponent } from './components/animaltype/animaltype.componen
 import { FoodComponent } from './components/food/food.component';
 import { ZookeeperComponent } from './components/zookeeper/zookeeper.component';
 import { HttpClientModule } from "@angular/common/http";
+import { AnimalSpecimenFormComponent } from './components/forms/animal-specimen/animal-specimen.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from "@angular/common/http";
     CategoryComponent,
     AnimalTypeComponent,
     FoodComponent,
-    ZookeeperComponent
+    ZookeeperComponent,
+    AnimalSpecimenFormComponent
   ],
   imports: [
     BrowserModule,
