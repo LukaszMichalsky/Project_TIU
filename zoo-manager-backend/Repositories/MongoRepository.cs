@@ -38,7 +38,7 @@ namespace zoo_manager_backend.Repositories {
         }
 
         public List<T> Find(FilterDefinition<T> filter, FindOptions options = null) {
-            return collection.Find(filter, options).ToList();
+            return collection.Find(filter, options).Sort(new SortDefinitionBuilder<T>().Ascending(new StringFieldDefinition<T>("_id"))).ToList();
         }
 
         public T InsertOne(T newElement) {
