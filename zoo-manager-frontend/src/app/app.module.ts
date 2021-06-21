@@ -12,6 +12,7 @@ import { AnimalSpecimenFormComponent } from './components/forms/animal-specimen/
 import { AnimalTypeFormComponent } from './components/forms/animal-type/animal-type.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     ZookeeperComponent,
     AnimalSpecimenFormComponent,
     AnimalTypeFormComponent,
-    ModalComponent
+    ModalComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
