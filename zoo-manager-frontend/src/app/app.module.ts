@@ -9,6 +9,9 @@ import { FoodComponent } from './components/food/food.component';
 import { ZookeeperComponent } from './components/zookeeper/zookeeper.component';
 import { HttpClientModule } from "@angular/common/http";
 import { AnimalSpecimenFormComponent } from './components/forms/animal-specimen/animal-specimen.component';
+import { AnimalTypeFormComponent } from './components/forms/animal-type/animal-type.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,15 @@ import { AnimalSpecimenFormComponent } from './components/forms/animal-specimen/
     AnimalTypeComponent,
     FoodComponent,
     ZookeeperComponent,
-    AnimalSpecimenFormComponent
+    AnimalSpecimenFormComponent,
+    AnimalTypeFormComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

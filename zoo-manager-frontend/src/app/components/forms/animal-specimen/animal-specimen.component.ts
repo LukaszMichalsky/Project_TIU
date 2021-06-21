@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AnimalTypeService } from 'src/app/services/animaltype.service';
+import { AnimalSpecimen } from 'src/models/animalspecimen';
 import { AnimalType } from 'src/models/animaltype';
 
 @Component({
@@ -9,9 +10,12 @@ import { AnimalType } from 'src/models/animaltype';
   ]
 })
 export class AnimalSpecimenFormComponent implements OnInit {
-  @ViewChild("specimenName") specimenNameInput: ElementRef | undefined;
   animalTypes: AnimalType[] = [];
   isValid: boolean | null = null;
+
+  @ViewChild("specimenNameInput") specimenNameInput: ElementRef | undefined;
+  @ViewChild("specimenTypeInput") specimenTypeInput: ElementRef | undefined;
+  @Output() eventAddClicked: EventEmitter<AnimalSpecimen> = new EventEmitter<AnimalSpecimen>();
 
   constructor(private animalTypeService: AnimalTypeService) {}
 
@@ -31,5 +35,13 @@ export class AnimalSpecimenFormComponent implements OnInit {
     } else {
       this.isValid = true;
     }
+  }
+
+  addAnimalSpecimen(): void {
+    this.eventAddClicked.emit({
+      id: 0,
+      animalName: this.specimenNameInput?.nativeElement.value,
+      typeId: this.specimenTypeInput?.nativeElement.value
+    });
   }
 }

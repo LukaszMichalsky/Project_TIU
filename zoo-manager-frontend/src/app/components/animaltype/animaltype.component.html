@@ -1,3 +1,11 @@
+<app-modal modalID="modalAddSpecimen" modalTitle="Add new specimen">
+  <app-animal-specimen-form (eventAddClicked)="onAnimalSpecimenAdded($event)"></app-animal-specimen-form>
+</app-modal>
+
+<app-modal modalID="modalAddType" modalTitle="Add new animal type">
+  <app-animal-type-form (eventAddClicked)="onAnimalTypeAdded($event)"></app-animal-type-form>
+</app-modal>
+
 <div class="container">
   <table class="table">
     <thead>
@@ -31,11 +39,15 @@
         <td>{{specimen.animalName}}</td>
 
         <td class="d-flex justify-content-end">
-          <button class="btn btn-danger btn-sm">Delete specimen</button>
+          <button (click)="deleteSpecimen(specimen.id)" class="btn btn-danger btn-sm">Delete specimen</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalAddSpecimen">Add new specimen</button>
+  </div>
 
   <table class="table">
     <thead>
@@ -66,9 +78,13 @@
 
         <td class="d-flex justify-content-end">
           <button (click)="showSpecimens(animalType.id)" [disabled]="animalType.specimensCount === 0" class="btn btn-dark btn-sm m-1">Show specimens ({{animalType.specimensCount}})</button>
-          <button [disabled]="animalType.specimensCount > 0" class="btn btn-danger btn-sm m-1">Delete type</button>
+          <button (click)="deleteType(animalType.id)" [disabled]="animalType.specimensCount > 0" class="btn btn-danger btn-sm m-1">Delete type</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalAddType">Add new animal type</button>
+  </div>
 </div>

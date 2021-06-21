@@ -1,21 +1,21 @@
 <form>
   <div class="m-3">
     <label class="form-label">Animal specimen name</label>
-    <input #specimenName (keyup)="validate()" type="text" class="form-control" />
+    <input #specimenNameInput (keyup)="validate()" type="text" class="form-control" />
     <div *ngIf="isValid === true || isValid === null" class="form-text">Enter new specimen's name</div>
     <div *ngIf="isValid === false" class="form-text text-danger fw-bold">Minimum name's length is 5 letters</div>
   </div>
 
   <div class="m-3">
     <label class="form-label">Animal type</label>
-    <select class="form-select">
-      <option *ngFor="let type of animalTypes" value="type.id">{{type.typeName}}</option>
+    <select #specimenTypeInput class="form-select">
+      <option *ngFor="let type of animalTypes" [value]="type.id">{{type.typeName}}</option>
     </select>
     <div class="form-text">Select new specimen's type</div>
   </div>
 
   <div class="d-flex justify-content-end m-3">
-    <button [disabled]="!isValid" class="btn btn-primary m-1">Add</button>
-    <button class="btn btn-secondary m-1">Cancel</button>
+    <button type="button" (click)="addAnimalSpecimen()" [disabled]="!isValid" class="btn btn-primary m-1" data-bs-dismiss="modal">Add</button>
+    <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal">Cancel</button>
   </div>
 </form>

@@ -5,6 +5,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { AnimalSpecimen } from 'src/models/animalspecimen';
 import { AnimalTypeViewModel } from 'src/viewmodels/animaltype';
 import { Category } from 'src/models/category';
+import { AnimalType } from 'src/models/animaltype';
 
 @Component({
   selector: 'app-animaltype',
@@ -47,6 +48,11 @@ export class AnimalTypeComponent implements OnInit {
     });
   }
 
+  private refresh(): void {
+    this.loadData();
+    this.selectedTypeSpecimens = null;
+  }
+
   ngOnInit(): void {
     this.loadData();
   }
@@ -57,5 +63,29 @@ export class AnimalTypeComponent implements OnInit {
     });
 
     window.scrollTo(0, 0);
+  }
+
+  deleteSpecimen(id: number): void {
+    this.animalSpecimenService.delete(id).subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  onAnimalSpecimenAdded(newSpecimen: AnimalSpecimen): void {
+    this.animalSpecimenService.post(newSpecimen).subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  deleteType(id: number): void {
+    this.animalTypeService.delete(id).subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  onAnimalTypeAdded(newType: AnimalType): void {
+    this.animalTypeService.post(newType).subscribe(() => {
+      this.refresh();
+    });
   }
 }
