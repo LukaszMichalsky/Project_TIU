@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AnimalSpecimenService } from 'src/app/services/animalspecimen.service';
 import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -6,6 +6,7 @@ import { AnimalSpecimen } from 'src/models/animalspecimen';
 import { AnimalTypeViewModel } from 'src/viewmodels/animaltype';
 import { Category } from 'src/models/category';
 import { AnimalType } from 'src/models/animaltype';
+import { AnimalSpecimenFormComponent } from '../forms/animal-specimen/animal-specimen.component';
 
 @Component({
   selector: 'app-animaltype',
@@ -14,6 +15,8 @@ import { AnimalType } from 'src/models/animaltype';
   ]
 })
 export class AnimalTypeComponent implements OnInit {
+  @ViewChild(AnimalSpecimenFormComponent) animalSpecimenForm: AnimalSpecimenFormComponent | undefined;
+
   animalTypes: AnimalTypeViewModel[] = [];
   animalSpecimens: AnimalSpecimen[] = [];
   selectedTypeSpecimens: AnimalSpecimen[] | null = null;
@@ -51,6 +54,7 @@ export class AnimalTypeComponent implements OnInit {
   private refresh(): void {
     this.loadData();
     this.selectedTypeSpecimens = null;
+    this.animalSpecimenForm?.ngOnInit();
   }
 
   ngOnInit(): void {
