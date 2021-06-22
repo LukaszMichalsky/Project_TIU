@@ -3,6 +3,7 @@ import { AnimalSpecimenService } from 'src/app/services/animalspecimen.service';
 import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { AnimalType } from 'src/models/animaltype';
+import { Category } from 'src/models/category';
 import { CategoryViewModel } from 'src/viewmodels/category';
 
 @Component({
@@ -37,6 +38,11 @@ export class CategoryComponent implements OnInit {
     });
   }
 
+  private refresh(): void {
+    this.loadData();
+    this.selectedCategoryTypes = null;
+  }
+
   ngOnInit(): void {
     this.loadData();
   }
@@ -47,5 +53,17 @@ export class CategoryComponent implements OnInit {
     });
 
     window.scrollTo(0, 0);
+  }
+
+  deleteCategory(id: number): void {
+    this.categoryService.delete(id).subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  onCategoryAdded(newCategory: Category): void {
+    this.categoryService.post(newCategory).subscribe(() => {
+      this.refresh();
+    });
   }
 }

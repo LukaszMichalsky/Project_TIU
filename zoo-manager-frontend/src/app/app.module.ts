@@ -10,6 +10,7 @@ import { ZookeeperComponent } from './components/zookeeper/zookeeper.component';
 import { HttpClientModule } from "@angular/common/http";
 import { AnimalSpecimenFormComponent } from './components/forms/animal-specimen/animal-specimen.component';
 import { AnimalTypeFormComponent } from './components/forms/animal-type/animal-type.component';
+import { CategoryFormComponent } from './components/forms/category/category.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component';
@@ -24,7 +25,8 @@ import { MenuComponent } from './components/menu/menu.component';
     AnimalSpecimenFormComponent,
     AnimalTypeFormComponent,
     ModalComponent,
-    MenuComponent
+    MenuComponent,
+    CategoryFormComponent
   ],
   imports: [
     BrowserModule,
