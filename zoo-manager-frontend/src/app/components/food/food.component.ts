@@ -3,6 +3,7 @@ import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { FoodService } from 'src/app/services/food.service';
 import { FoodAssociationService } from 'src/app/services/foodassociation.service';
 import { AnimalType } from 'src/models/animaltype';
+import { Food } from 'src/models/food';
 import { FoodAssociation } from 'src/models/foodassociation';
 import { FoodViewModel } from 'src/viewmodels/food';
 
@@ -44,6 +45,11 @@ export class FoodComponent implements OnInit {
     });
   }
 
+  private refresh(): void {
+    this.loadData();
+    this.selectedFoodItemTypes = null;
+  }
+
   ngOnInit(): void {
     this.loadData();
   }
@@ -57,6 +63,18 @@ export class FoodComponent implements OnInit {
 
     this.selectedFoodItemTypes = this.allAnimalTypes.filter(animalType => {
       return associatedAnimalTypeIDs.includes(animalType.id);
+    });
+  }
+
+  deleteFood(id: number): void {
+    this.foodService.delete(id).subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  onFoodAdded(newFood: Food): void {
+    this.foodService.post(newFood).subscribe(() => {
+      this.refresh();
     });
   }
 }

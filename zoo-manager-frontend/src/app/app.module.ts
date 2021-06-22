@@ -12,6 +12,7 @@ import { AnimalSpecimenFormComponent } from './components/forms/animal-specimen/
 import { AnimalTypeFormComponent } from './components/forms/animal-type/animal-type.component';
 import { CategoryFormComponent } from './components/forms/category/category.component';
 import { ZookeeperFormComponent } from './components/forms/zookeeper/zookeeper.component';
+import { FoodFormComponent } from './components/forms/food/food.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component';
@@ -30,6 +31,7 @@ import { MenuItemComponent } from './components/menu-item/menu-item.component';
     MenuComponent,
     CategoryFormComponent,
     ZookeeperFormComponent,
+    FoodFormComponent,
     MenuItemComponent
   ],
   imports: [
