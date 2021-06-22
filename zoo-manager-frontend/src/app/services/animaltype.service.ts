@@ -8,7 +8,7 @@ import { AnimalType } from 'src/models/animaltype';
   providedIn: 'root'
 })
 export class AnimalTypeService {
-  private controllerURL = "AnimalType"
+  private controllerURL: string = "AnimalType"
 
   constructor(private http: HttpClient) {}
 

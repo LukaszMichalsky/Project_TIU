@@ -3,6 +3,7 @@ import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { ZookeeperService } from 'src/app/services/zookeeper.service';
 import { ZookeeperAssociationService } from 'src/app/services/zookeeperassociation.service';
 import { AnimalType } from 'src/models/animaltype';
+import { Zookeeper } from 'src/models/zookeeper';
 import { ZookeeperAssociation } from 'src/models/zookeeperassociation';
 import { ZookeeperViewModel } from 'src/viewmodels/zookeeper';
 
@@ -44,6 +45,11 @@ export class ZookeeperComponent implements OnInit {
     });
   }
 
+  private refresh(): void {
+    this.loadData();
+    this.selectedZookeeperTypes = null;
+  }
+
   ngOnInit(): void {
     this.loadData();
   }
@@ -60,5 +66,17 @@ export class ZookeeperComponent implements OnInit {
     });
 
     window.scrollTo(0, 0);
+  }
+
+  deleteZookeeper(id: number): void {
+    this.zookeeperService.delete(id).subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  onZookeeperAdded(newZookeeper: Zookeeper): void {
+    this.zookeeperService.post(newZookeeper).subscribe(() => {
+      this.refresh();
+    });
   }
 }

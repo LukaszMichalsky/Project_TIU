@@ -8,7 +8,7 @@ import { Category } from 'src/models/category';
   providedIn: 'root'
 })
 export class CategoryService {
-  private controllerURL = "Category";
+  private controllerURL: string = "Category";
 
   constructor(private http: HttpClient) {}
 
