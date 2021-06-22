@@ -1,65 +1,33 @@
 <div class="container d-flex justify-content-center align-items-center flex-wrap">
-  <a routerLink="animaltype">
-    <div class="card border-primary bg-light m-5">
-      <div class="card-header d-flex justify-content-center">
-        <img src="https://img.icons8.com/windows/96/0D6EFD/book--v1.png"/>
-      </div>
+  <app-menu-item
+    cardText="Manage animal types, add or delete them. Manage type specimens."
+    cardTitle="Animal types"
+    classType="primary"
+    imageSource="https://img.icons8.com/windows/96/0D6EFD/book--v1.png"
+    routerLink="animaltype"
+  ></app-menu-item>
 
-      <div class="card-body">
-        <h4 class="card-title text-primary">Animal types</h4>
+  <app-menu-item
+    cardText="Create new or delete existing animal categories. View associated animal types."
+    cardTitle="Categories"
+    classType="success"
+    imageSource="https://img.icons8.com/pastel-glyph/96/198754/dog--v5.png"
+    routerLink="category"
+  ></app-menu-item>
 
-        <p class="card-text text-primary">
-          Manage animal types, add or delete them. Manage type specimens.
-        </p>
-      </div>
-    </div>
-  </a>
+  <app-menu-item
+    cardText="Create new or delete existing zookeepers. View associated animal types."
+    cardTitle="Zookeepers"
+    classType="warning"
+    imageSource="https://img.icons8.com/windows/96/FFC107/guest-male--v1.png"
+    routerLink="zookeeper"
+  ></app-menu-item>
 
-  <a routerLink="category">
-    <div class="card border-success bg-light m-5">
-      <div class="card-header d-flex justify-content-center">
-        <img src="https://img.icons8.com/pastel-glyph/96/198754/dog--v5.png"/>
-      </div>
-
-      <div class="card-body">
-        <h4 class="card-title text-success">Categories</h4>
-
-        <p class="card-text text-success">
-          Create new or delete existing animal categories. View associated animal types.
-        </p>
-      </div>
-    </div>
-  </a>
-
-  <a routerLink="zookeeper">
-    <div class="card border-warning bg-light m-5">
-      <div class="card-header d-flex justify-content-center">
-        <img src="https://img.icons8.com/windows/96/FFC107/guest-male--v1.png"/>
-      </div>
-
-      <div class="card-body">
-        <h4 class="card-title text-warning">Zookeepers</h4>
-
-        <p class="card-text text-warning">
-          Create new or delete existing zookeepers. View associated animal types.
-        </p>
-      </div>
-    </div>
-  </a>
-
-  <a routerLink="food">
-    <div class="card border-danger bg-light m-5">
-      <div class="card-header d-flex justify-content-center">
-        <img src="https://img.icons8.com/windows/96/DC3545/caviar.png"/>
-      </div>
-
-      <div class="card-body">
-        <h4 class="card-title text-danger">Food items</h4>
-
-        <p class="card-text text-danger">
-          Food items management panel. View associated animal types.
-        </p>
-      </div>
-    </div>
-  </a>
+  <app-menu-item
+    cardText="Food items management panel. View associated animal types."
+    cardTitle="Food items"
+    classType="danger"
+    imageSource="https://img.icons8.com/windows/96/DC3545/caviar.png"
+    routerLink="food"
+  ></app-menu-item>
 </div>

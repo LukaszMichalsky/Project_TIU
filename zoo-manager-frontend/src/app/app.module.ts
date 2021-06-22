@@ -15,6 +15,7 @@ import { ZookeeperFormComponent } from './components/forms/zookeeper/zookeeper.c
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MenuComponent } from './components/menu/menu.component';
     ModalComponent,
     MenuComponent,
     CategoryFormComponent,
-    ZookeeperFormComponent
+    ZookeeperFormComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,
