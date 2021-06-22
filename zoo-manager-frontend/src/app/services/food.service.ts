@@ -8,9 +8,19 @@ import { Food } from 'src/models/food';
   providedIn: 'root'
 })
 export class FoodService {
+  private controllerURL: string = "Food";
+
   constructor(private http: HttpClient) {}
 
   public get(): Observable<Food[]> {
-    return this.http.get<Food[]>(Config.getURL("Food"));
+    return this.http.get<Food[]>(Config.getURL(this.controllerURL));
+  }
+
+  public post(newType: Food): Observable<Food> {
+    return this.http.post<Food>(Config.getURL(this.controllerURL), newType);
+  }
+
+  public delete(id: number): Observable<Food> {
+    return this.http.delete<Food>(Config.getURL(`${this.controllerURL}/${id}`));
   }
 }

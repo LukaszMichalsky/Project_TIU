@@ -1,0 +1,15 @@
+<div class="card border-{{classType}} bg-light m-5">
+  <a [routerLink]="routerLink">
+    <div class="card-header d-flex justify-content-center">
+      <img [src]="imageSource"/>
+    </div>
+
+    <div class="card-body">
+      <h4 class="card-title text-{{classType}}">{{cardTitle}}</h4>
+
+      <p class="card-text text-{{classType}}">
+        {{cardText}}
+      </p>
+    </div>
+  </a>
+</div>

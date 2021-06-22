@@ -1,9 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Config } from 'src/config';
+import { ZookeeperAssociation } from 'src/models/zookeeperassociation';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ZookeeperassociationService {
+export class ZookeeperAssociationService {
+  private controllerURL: string = "ZookeeperAssociation";
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
+
+  public get(): Observable<ZookeeperAssociation[]> {
+    return this.http.get<ZookeeperAssociation[]>(Config.getURL(this.controllerURL));
+  }
+
+  public post(newAssociation: ZookeeperAssociation): Observable<ZookeeperAssociation> {
+    return this.http.post<ZookeeperAssociation>(Config.getURL(this.controllerURL), newAssociation);
+  }
+
+  public delete(id: number): Observable<ZookeeperAssociation> {
+    return this.http.delete<ZookeeperAssociation>(Config.getURL(`${this.controllerURL}/${id}`));
+  }
 }

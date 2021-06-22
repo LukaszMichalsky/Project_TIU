@@ -1,5 +1,4 @@
-export interface AnimalSpecimen
-{
+export interface AnimalSpecimen {
     id: number;
     animalName: string;
     typeId: number;

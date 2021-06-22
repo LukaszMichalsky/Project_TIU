@@ -48,11 +48,7 @@ namespace zoo_manager_backend {
 
             app.UseHttpsRedirection();
             app.UseRouting();
-
-            app.UseCors(builder => {
-                builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().Build();
-            });
-
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().Build());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {

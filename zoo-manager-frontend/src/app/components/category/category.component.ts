@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimalSpecimenService } from 'src/app/services/animalspecimen.service';
-import { AnimaltypeService } from 'src/app/services/animaltype.service';
+import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { AnimalType } from 'src/models/animaltype';
+import { Category } from 'src/models/category';
 import { CategoryViewModel } from 'src/viewmodels/category';
 
 @Component({
@@ -16,27 +17,30 @@ export class CategoryComponent implements OnInit {
   categories: CategoryViewModel[] = [];
   selectedCategoryTypes: AnimalType[] | null = null;
 
-  constructor(private animalTypeService: AnimaltypeService, private animalSpecimenService: AnimalSpecimenService, private categoryService: CategoryService) {}
+  constructor(private animalTypeService: AnimalTypeService, private categoryService: CategoryService) {}
 
   private loadData(): void {
     this.categoryService.get().subscribe(categories => {
       this.animalTypeService.get().subscribe(animalTypes => {
-        this.animalSpecimenService.get().subscribe(animalSpecimens => {
-          this.animalTypes = animalTypes;
+        this.animalTypes = animalTypes;
 
-          this.categories = categories.map(category => {
-            return {
-              id: category.id,
-              categoryName: category.categoryName,
+        this.categories = categories.map(category => {
+          return {
+            id: category.id,
+            categoryName: category.categoryName,
 
-              typesCount: this.animalTypes.filter(animalType => {
-                return animalType.typeCategoryId === category.id
-              }).length
-            }
-          });
+            typesCount: this.animalTypes.filter(animalType => {
+              return animalType.typeCategoryId === category.id;
+            }).length
+          }
         });
       });
     });
+  }
+
+  private refresh(): void {
+    this.loadData();
+    this.selectedCategoryTypes = null;
   }
 
   ngOnInit(): void {
@@ -49,5 +53,17 @@ export class CategoryComponent implements OnInit {
     });
 
     window.scrollTo(0, 0);
+  }
+
+  deleteCategory(id: number): void {
+    this.categoryService.delete(id).subscribe(() => {
+      this.refresh();
+    });
+  }
+
+  onCategoryAdded(newCategory: Category): void {
+    this.categoryService.post(newCategory).subscribe(() => {
+      this.refresh();
+    });
   }
 }

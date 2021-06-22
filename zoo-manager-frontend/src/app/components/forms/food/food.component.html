@@ -1,0 +1,32 @@
+<form>
+  <div class="m-3">
+    <label class="form-label">Food item name</label>
+    <input #foodNameInput (keyup)="validateName()" type="text" class="form-control" />
+    <div *ngIf="isNameValid === true || isNameValid === null" class="form-text">Enter new food item's name</div>
+    <div *ngIf="isNameValid === false" class="form-text text-danger fw-bold">Minimum name's length is 3 letters</div>
+  </div>
+
+  <div class="m-3">
+    <label class="form-label">Food item market price</label>
+
+    <div class="input-group">
+      <input #foodPriceInput (keyup)="validatePrice()" type="text" class="form-control" placeholder="0.00" />
+      <span class="input-group-text">USD</span>
+    </div>
+
+    <div *ngIf="isPriceValid === true || isPriceValid === null" class="form-text">Enter new food item's market price</div>
+    <div *ngIf="isPriceValid === false" class="form-text text-danger fw-bold">Enter proper price value</div>
+  </div>
+
+  <div class="m-3">
+    <label class="form-label">Food item quantity (units)</label>
+    <input #foodQuantityInput (keyup)="validateQuantity()" type="text" class="form-control" />
+    <div *ngIf="isQuantityValid === true || isQuantityValid === null" class="form-text">Enter new food item's quantity</div>
+    <div *ngIf="isQuantityValid === false" class="form-text text-danger fw-bold">Enter proper number (integers only)</div>
+  </div>
+
+  <div class="d-flex justify-content-end m-3">
+    <button type="button" (click)="addFood()" [disabled]="!isNameValid || !isPriceValid || !isQuantityValid" class="btn btn-primary m-1" data-bs-dismiss="modal">Add</button>
+    <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal">Cancel</button>
+  </div>
+</form>

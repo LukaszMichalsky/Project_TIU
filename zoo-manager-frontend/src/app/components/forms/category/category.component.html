@@ -1,0 +1,13 @@
+<form>
+  <div class="m-3">
+    <label class="form-label">Category name</label>
+    <input #categoryNameInput (keyup)="validate()" type="text" class="form-control" />
+    <div *ngIf="isValid === true || isValid === null" class="form-text">Enter new category's name</div>
+    <div *ngIf="isValid === false" class="form-text text-danger fw-bold">Minimum name's length is 5 letters</div>
+  </div>
+
+  <div class="d-flex justify-content-end m-3">
+    <button type="button" (click)="addCategory()" [disabled]="!isValid" class="btn btn-primary m-1" data-bs-dismiss="modal">Add</button>
+    <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal">Cancel</button>
+  </div>
+</form>

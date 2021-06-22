@@ -1,4 +1,54 @@
+<app-modal modalID="modalAddZookeeper" modalTitle="Add new zookeeper">
+  <app-zookeeper-form (eventAddClicked)="onZookeeperAdded($event)"></app-zookeeper-form>
+</app-modal>
+
+<app-modal modalID="modalAssociateZookeeper" modalTitle="Associate zookeeper">
+  <app-zookeeper-association-form (eventAddClicked)="onZookeeperAssociated($event)"></app-zookeeper-association-form>
+</app-modal>
+
 <div class="container">
+  <table class="table">
+    <thead>
+      <tr class="bg-info">
+        <th>Type ID</th>
+        <th>Type name</th>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="selectedZookeeperTypes === null">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>Select zookeeper to show associated animal types...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedZookeeperTypes !== null && selectedZookeeperTypes.length === 0">
+      <tr>
+        <td class="table-info text-center" colspan="3">
+          <i>No animal types found...</i>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="selectedZookeeperTypes !== null && selectedZookeeperTypes.length > 0">
+      <tr *ngFor="let type of selectedZookeeperTypes" class="table-info">
+        <td>{{type.id}}</td>
+        <td>{{type.typeName}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="deleteAssociation(type.id)" class="btn btn-danger btn-sm m-1">Delete association</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalAssociateZookeeper">Associate zookeeper</button>
+  </div>
+
   <table class="table">
     <thead>
       <tr class="table-dark">
@@ -6,12 +56,14 @@
         <th>Zookeeper name</th>
         <th>Zookeeper surname</th>
         <th>Zookeeper phone number</th>
+
+        <th></th>
       </tr>
     </thead>
 
     <tbody *ngIf="zookeepers.length == 0">
       <tr>
-        <td class="table-secondary text-center" colspan="4"><i>No zookeepers found</i></td>
+        <td class="table-secondary text-center" colspan="5"><i>No zookeepers found</i></td>
       </tr>
     </tbody>
 
@@ -21,7 +73,16 @@
         <td>{{zookeeper.zookeeperName}}</td>
         <td>{{zookeeper.zookeeperSurname}}</td>
         <td>{{zookeeper.zookeeperPhoneNumber}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="showTypes(zookeeper.id)" [disabled]="zookeeper.typesCount === 0" class="btn btn-dark btn-sm m-1">Show associated animal types ({{zookeeper.typesCount}})</button>
+          <button (click)="deleteZookeeper(zookeeper.id)" [disabled]="zookeeper.typesCount > 0" class="btn btn-danger btn-sm m-1">Delete zookeeper</button>
+        </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalAddZookeeper">Add new zookeeper</button>
+  </div>
 </div>

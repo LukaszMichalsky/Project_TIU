@@ -8,9 +8,19 @@ import { AnimalSpecimen } from 'src/models/animalspecimen';
   providedIn: 'root'
 })
 export class AnimalSpecimenService {
+  private controllerURL: string = "AnimalSpecimen";
+
   constructor(private http: HttpClient) {}
 
   public get(): Observable<AnimalSpecimen[]> {
-    return this.http.get<AnimalSpecimen[]>(Config.getURL("AnimalSpecimen"));
+    return this.http.get<AnimalSpecimen[]>(Config.getURL(this.controllerURL));
+  }
+
+  public post(newSpecimen: AnimalSpecimen): Observable<AnimalSpecimen> {
+    return this.http.post<AnimalSpecimen>(Config.getURL(this.controllerURL), newSpecimen);
+  }
+
+  public delete(id: number): Observable<AnimalSpecimen> {
+    return this.http.delete<AnimalSpecimen>(Config.getURL(`${this.controllerURL}/${id}`));
   }
 }

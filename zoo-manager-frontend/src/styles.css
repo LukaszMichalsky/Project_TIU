@@ -7,6 +7,14 @@ body, html {
     padding: 0 !important;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 .menu-button {
     width: 200px;
+}
+
+.card {
+    width: 350px;
 }
