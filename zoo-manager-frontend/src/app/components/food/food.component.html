@@ -2,12 +2,18 @@
   <app-food-form (eventAddClicked)="onFoodAdded($event)"></app-food-form>
 </app-modal>
 
+<app-modal modalID="modalAssociateFood" modalTitle="Associate food item">
+  <app-food-association-form (eventAddClicked)="onFoodAssociated($event)"></app-food-association-form>
+</app-modal>
+
 <div class="container">
   <table class="table">
     <thead>
       <tr class="bg-info">
         <th>Type ID</th>
         <th>Type name</th>
+
+        <th></th>
       </tr>
     </thead>
 
@@ -31,9 +37,17 @@
       <tr *ngFor="let type of selectedFoodItemTypes" class="table-info">
         <td>{{type.id}}</td>
         <td>{{type.typeName}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="deleteAssociation(type.id)" class="btn btn-danger btn-sm m-1">Delete association</button>
+        </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalAssociateFood">Associate food item</button>
+  </div>
 
   <table class="table">
     <thead>

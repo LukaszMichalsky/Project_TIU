@@ -8,9 +8,19 @@ import { FoodAssociation } from 'src/models/foodassociation';
   providedIn: 'root'
 })
 export class FoodAssociationService {
+  private controllerURL: string = "FoodAssociation";
+
   constructor(private http: HttpClient) {}
 
   public get(): Observable<FoodAssociation[]> {
-    return this.http.get<FoodAssociation[]>(Config.getURL("FoodAssociation"));
+    return this.http.get<FoodAssociation[]>(Config.getURL(this.controllerURL));
+  }
+
+  public post(newAssociation: FoodAssociation): Observable<FoodAssociation> {
+    return this.http.post<FoodAssociation>(Config.getURL(this.controllerURL), newAssociation);
+  }
+
+  public delete(id: number): Observable<FoodAssociation> {
+    return this.http.delete<FoodAssociation>(Config.getURL(`${this.controllerURL}/${id}`));
   }
 }

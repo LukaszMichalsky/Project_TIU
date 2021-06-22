@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { ZookeeperService } from 'src/app/services/zookeeper.service';
 import { ZookeeperAssociationService } from 'src/app/services/zookeeperassociation.service';
@@ -6,6 +6,7 @@ import { AnimalType } from 'src/models/animaltype';
 import { Zookeeper } from 'src/models/zookeeper';
 import { ZookeeperAssociation } from 'src/models/zookeeperassociation';
 import { ZookeeperViewModel } from 'src/viewmodels/zookeeper';
+import { ZookeeperAssociationFormComponent } from '../forms/zookeeper-association-form/zookeeper-association-form.component';
 
 @Component({
   selector: 'app-zookeeper',
@@ -14,9 +15,13 @@ import { ZookeeperViewModel } from 'src/viewmodels/zookeeper';
   ]
 })
 export class ZookeeperComponent implements OnInit {
+  @ViewChild(ZookeeperAssociationFormComponent) zookeeperAssociationForm: ZookeeperAssociationFormComponent | undefined;
+
   zookeeperAssociations: ZookeeperAssociation[] = [];
   zookeepers: ZookeeperViewModel[] = [];
   allAnimalTypes: AnimalType[] = [];
+
+  selectedZookeeperID: number = 0;
   selectedZookeeperTypes: AnimalType[] | null = null;
 
   constructor(private animalTypeService: AnimalTypeService, private zookeeperAssociationService: ZookeeperAssociationService, private zookeeperService: ZookeeperService) {}
@@ -48,6 +53,7 @@ export class ZookeeperComponent implements OnInit {
   private refresh(): void {
     this.loadData();
     this.selectedZookeeperTypes = null;
+    this.zookeeperAssociationForm?.ngOnInit();
   }
 
   ngOnInit(): void {
@@ -65,6 +71,7 @@ export class ZookeeperComponent implements OnInit {
       return associatedAnimalTypeIDs.includes(animalType.id);
     });
 
+    this.selectedZookeeperID = zookeeperID;
     window.scrollTo(0, 0);
   }
 
@@ -78,6 +85,18 @@ export class ZookeeperComponent implements OnInit {
     this.zookeeperService.post(newZookeeper).subscribe(() => {
       this.refresh();
     });
+  }
+
+  deleteAssociation(animalTypeID: number): void {
+    let associations: ZookeeperAssociation[] = this.zookeeperAssociations.filter(value => {
+      return (value.animalTypeId === animalTypeID) && (value.typeZookeeperId === this.selectedZookeeperID);
+    });
+
+    if (associations.length === 1) {
+      this.zookeeperAssociationService.delete(associations[0].id).subscribe(() => {
+        this.refresh();
+      });
+    }
   }
 
   onZookeeperAssociated(newAssociation: ZookeeperAssociation) {

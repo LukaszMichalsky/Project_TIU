@@ -12,6 +12,8 @@
       <tr class="bg-info">
         <th>Type ID</th>
         <th>Type name</th>
+
+        <th></th>
       </tr>
     </thead>
 
@@ -35,6 +37,10 @@
       <tr *ngFor="let type of selectedZookeeperTypes" class="table-info">
         <td>{{type.id}}</td>
         <td>{{type.typeName}}</td>
+
+        <td class="d-flex justify-content-end">
+          <button (click)="deleteAssociation(type.id)" class="btn btn-danger btn-sm m-1">Delete association</button>
+        </td>
       </tr>
     </tbody>
   </table>

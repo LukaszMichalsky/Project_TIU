@@ -17,6 +17,8 @@ export class FoodComponent implements OnInit {
   foodAssociations: FoodAssociation[] = [];
   foodItems: FoodViewModel[] = [];
   allAnimalTypes: AnimalType[] = [];
+
+  selectedFoodItemID: number = 0;
   selectedFoodItemTypes: AnimalType[] | null = null;
 
   constructor(private animalTypeService: AnimalTypeService, private foodAssociationService: FoodAssociationService, private foodService: FoodService) {}
@@ -64,6 +66,9 @@ export class FoodComponent implements OnInit {
     this.selectedFoodItemTypes = this.allAnimalTypes.filter(animalType => {
       return associatedAnimalTypeIDs.includes(animalType.id);
     });
+
+    this.selectedFoodItemID = foodItemID;
+    window.scrollTo(0, 0);
   }
 
   deleteFood(id: number): void {
@@ -72,9 +77,29 @@ export class FoodComponent implements OnInit {
     });
   }
 
+  deleteAssociation(animalTypeID: number): void {
+    let associations: FoodAssociation[] = this.foodAssociations.filter(value => {
+      return (value.animalTypeId === animalTypeID) && (value.foodId === this.selectedFoodItemID);
+    });
+
+    if (associations.length === 1) {
+      this.foodAssociationService.delete(associations[0].id).subscribe(() => {
+        this.refresh();
+      });
+    }
+  }
+
   onFoodAdded(newFood: Food): void {
     this.foodService.post(newFood).subscribe(() => {
       this.refresh();
+    });
+  }
+
+  onFoodAssociated(newAssociation: FoodAssociation) {
+    this.foodAssociationService.post(newAssociation).subscribe(() => {
+      this.refresh();
+    }, error => {
+      alert(JSON.stringify(error, null, 4));
     });
   }
 }
