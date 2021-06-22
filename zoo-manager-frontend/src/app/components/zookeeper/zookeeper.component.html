@@ -2,6 +2,10 @@
   <app-zookeeper-form (eventAddClicked)="onZookeeperAdded($event)"></app-zookeeper-form>
 </app-modal>
 
+<app-modal modalID="modalAssociateZookeeper" modalTitle="Associate zookeeper">
+  <app-zookeeper-association-form (eventAddClicked)="onZookeeperAssociated($event)"></app-zookeeper-association-form>
+</app-modal>
+
 <div class="container">
   <table class="table">
     <thead>
@@ -34,6 +38,10 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalAssociateZookeeper">Associate zookeeper</button>
+  </div>
 
   <table class="table">
     <thead>

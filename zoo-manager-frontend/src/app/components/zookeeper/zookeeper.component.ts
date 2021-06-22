@@ -79,4 +79,12 @@ export class ZookeeperComponent implements OnInit {
       this.refresh();
     });
   }
+
+  onZookeeperAssociated(newAssociation: ZookeeperAssociation) {
+    this.zookeeperAssociationService.post(newAssociation).subscribe(() => {
+      this.refresh();
+    }, error => {
+      alert(JSON.stringify(error, null, 4));
+    });
+  }
 }

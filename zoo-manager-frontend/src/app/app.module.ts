@@ -17,6 +17,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './components/menu/menu.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { ZookeeperAssociationFormComponent } from './components/forms/zookeeper-association-form/zookeeper-association-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MenuItemComponent } from './components/menu-item/menu-item.component';
     CategoryFormComponent,
     ZookeeperFormComponent,
     FoodFormComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    ZookeeperAssociationFormComponent
   ],
   imports: [
     BrowserModule,

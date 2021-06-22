@@ -8,9 +8,19 @@ import { ZookeeperAssociation } from 'src/models/zookeeperassociation';
   providedIn: 'root'
 })
 export class ZookeeperAssociationService {
+  private controllerURL: string = "ZookeeperAssociation";
+
   constructor(private http: HttpClient) {}
 
   public get(): Observable<ZookeeperAssociation[]> {
-    return this.http.get<ZookeeperAssociation[]>(Config.getURL("ZookeeperAssociation"));
+    return this.http.get<ZookeeperAssociation[]>(Config.getURL(this.controllerURL));
+  }
+
+  public post(newAssociation: ZookeeperAssociation): Observable<ZookeeperAssociation> {
+    return this.http.post<ZookeeperAssociation>(Config.getURL(this.controllerURL), newAssociation);
+  }
+
+  public delete(id: number): Observable<ZookeeperAssociation> {
+    return this.http.delete<ZookeeperAssociation>(Config.getURL(`${this.controllerURL}/${id}`));
   }
 }
