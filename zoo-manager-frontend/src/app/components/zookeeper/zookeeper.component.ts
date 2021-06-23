@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { ZookeeperService } from 'src/app/services/zookeeper.service';
 import { ZookeeperAssociationService } from 'src/app/services/zookeeperassociation.service';
@@ -16,11 +16,13 @@ import { ZookeeperAssociationFormComponent } from '../forms/zookeeper-associatio
 })
 export class ZookeeperComponent implements OnInit {
   @ViewChild(ZookeeperAssociationFormComponent) zookeeperAssociationForm: ZookeeperAssociationFormComponent | undefined;
+  @ViewChild("buttonModalError") buttonModalError: ElementRef | undefined;
 
   zookeeperAssociations: ZookeeperAssociation[] = [];
   zookeepers: ZookeeperViewModel[] = [];
   allAnimalTypes: AnimalType[] = [];
 
+  errorMessage: string = '';
   selectedZookeeperID: number = 0;
   selectedZookeeperTypes: AnimalType[] | null = null;
 
@@ -103,7 +105,8 @@ export class ZookeeperComponent implements OnInit {
     this.zookeeperAssociationService.post(newAssociation).subscribe(() => {
       this.refresh();
     }, error => {
-      alert(JSON.stringify(error, null, 4));
+      this.errorMessage = error.error;
+      this.buttonModalError?.nativeElement.click();
     });
   }
 }

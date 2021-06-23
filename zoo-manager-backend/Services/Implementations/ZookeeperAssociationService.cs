@@ -53,7 +53,7 @@ namespace zoo_manager_backend.Services {
                 new FilterDefinitionBuilder<ZookeeperAssociation>().Where(zookeeper => zookeeper.AnimalTypeId == zookeeperAssociation.AnimalTypeId),
                 new FilterDefinitionBuilder<ZookeeperAssociation>().Where(zookeeper => zookeeper.TypeZookeeperId == zookeeperAssociation.TypeZookeeperId)
             )).Count > 0) {
-                throw new DuplicateFoundException("Zookeeper association duplicate found");
+                throw new DuplicateFoundException("Zookeeper association duplicate found, cannot create new association with given zookeeper ID and animal type ID");
             }
 
             // Add item to database

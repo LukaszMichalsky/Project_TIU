@@ -6,6 +6,14 @@
   <app-zookeeper-association-form (eventAddClicked)="onZookeeperAssociated($event)"></app-zookeeper-association-form>
 </app-modal>
 
+<app-modal modalID="modalError" modalTitle="Error">
+  {{errorMessage}}
+
+  <div class="d-flex justify-content-end m-3">
+    <button type="button" class="btn btn-danger m-1" data-bs-dismiss="modal">OK</button>
+  </div>
+</app-modal>
+
 <div class="container">
   <table class="table">
     <thead>
@@ -84,5 +92,9 @@
 
   <div class="d-flex justify-content-end mb-3">
     <button class="btn btn-warning btn-sm m-1" data-bs-toggle="modal" data-bs-target="#modalAddZookeeper">Add new zookeeper</button>
+  </div>
+
+  <div class="d-none">
+    <button #buttonModalError data-bs-toggle="modal" data-bs-target="#modalError"></button>
   </div>
 </div>

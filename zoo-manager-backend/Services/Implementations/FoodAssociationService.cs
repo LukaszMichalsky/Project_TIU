@@ -53,7 +53,7 @@ namespace zoo_manager_backend.Services {
                 new FilterDefinitionBuilder<FoodAssociation>().Where(food => food.AnimalTypeId == foodAssociation.AnimalTypeId),
                 new FilterDefinitionBuilder<FoodAssociation>().Where(food => food.FoodId == foodAssociation.FoodId)
             )).Count > 0) {
-                throw new DuplicateFoundException("Food association duplicate found");
+                throw new DuplicateFoundException("Food association duplicate found, cannot create new association with given food item ID and animal type ID");
             }
 
             // Add item to database

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AnimalTypeService } from 'src/app/services/animaltype.service';
 import { FoodService } from 'src/app/services/food.service';
 import { FoodAssociationService } from 'src/app/services/foodassociation.service';
@@ -14,10 +14,13 @@ import { FoodViewModel } from 'src/viewmodels/food';
   ]
 })
 export class FoodComponent implements OnInit {
+  @ViewChild("buttonModalError") buttonModalError: ElementRef | undefined;
+
   foodAssociations: FoodAssociation[] = [];
   foodItems: FoodViewModel[] = [];
   allAnimalTypes: AnimalType[] = [];
 
+  errorMessage: string = '';
   selectedFoodItemID: number = 0;
   selectedFoodItemTypes: AnimalType[] | null = null;
 
@@ -99,7 +102,8 @@ export class FoodComponent implements OnInit {
     this.foodAssociationService.post(newAssociation).subscribe(() => {
       this.refresh();
     }, error => {
-      alert(JSON.stringify(error, null, 4));
+      this.errorMessage = error.error;
+      this.buttonModalError?.nativeElement.click();
     });
   }
 }
