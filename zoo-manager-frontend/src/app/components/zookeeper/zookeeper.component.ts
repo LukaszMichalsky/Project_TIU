@@ -28,7 +28,7 @@ export class ZookeeperComponent implements OnInit {
 
   constructor(private animalTypeService: AnimalTypeService, private zookeeperAssociationService: ZookeeperAssociationService, private zookeeperService: ZookeeperService) {}
 
-  private loadData(): void {
+  private loadData(onDataLoaded?: Function): void {
     this.zookeeperService.get().subscribe(zookeepers => {
       this.zookeeperAssociationService.get().subscribe(zookeeperAssociations => {
         this.animalTypeService.get().subscribe(animalTypes => {
@@ -47,15 +47,20 @@ export class ZookeeperComponent implements OnInit {
               }).length
             };
           });
+
+          // Invoke additional callback (if provided).
+          onDataLoaded?.();
         });
       });
     });
   }
 
   private refresh(): void {
-    this.loadData();
-    this.selectedZookeeperTypes = null;
-    this.zookeeperAssociationForm?.ngOnInit();
+    this.loadData(() => {
+      this.selectedZookeeperTypes = null;
+      this.zookeeperAssociationForm?.ngOnInit();
+      this.showTypes(this.selectedZookeeperID);
+    });
   }
 
   ngOnInit(): void {

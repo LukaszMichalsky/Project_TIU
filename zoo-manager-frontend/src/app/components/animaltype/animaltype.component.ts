@@ -19,11 +19,13 @@ export class AnimalTypeComponent implements OnInit {
 
   animalTypes: AnimalTypeViewModel[] = [];
   animalSpecimens: AnimalSpecimen[] = [];
+
+  selectedTypeID: number = 0;
   selectedTypeSpecimens: AnimalSpecimen[] | null = null;
 
   constructor(private animalTypeService: AnimalTypeService, private categoryService: CategoryService, private animalSpecimenService: AnimalSpecimenService) {}
 
-  private loadData(): void {
+  private loadData(onDataLoaded?: Function): void {
     this.animalTypeService.get().subscribe(animalTypes => {
       this.categoryService.get().subscribe(categories => {
         this.animalSpecimenService.get().subscribe(specimens => {
@@ -46,15 +48,20 @@ export class AnimalTypeComponent implements OnInit {
               }).length
             }
           });
+
+          // Invoke additional callback (if provided).
+          onDataLoaded?.();
         });
       });
     });
   }
 
   private refresh(): void {
-    this.loadData();
-    this.selectedTypeSpecimens = null;
-    this.animalSpecimenForm?.ngOnInit();
+    this.loadData(() => {
+      this.selectedTypeSpecimens = null;
+      this.animalSpecimenForm?.ngOnInit();
+      this.showSpecimens(this.selectedTypeID);
+    });
   }
 
   ngOnInit(): void {
@@ -66,6 +73,7 @@ export class AnimalTypeComponent implements OnInit {
       return specimen.typeId === animalTypeID;
     });
 
+    this.selectedTypeID = animalTypeID;
     window.scrollTo(0, 0);
   }
 

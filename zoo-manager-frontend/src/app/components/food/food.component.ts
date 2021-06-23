@@ -6,6 +6,7 @@ import { AnimalType } from 'src/models/animaltype';
 import { Food } from 'src/models/food';
 import { FoodAssociation } from 'src/models/foodassociation';
 import { FoodViewModel } from 'src/viewmodels/food';
+import { FoodAssociationFormComponent } from '../forms/food-association-form/food-association-form.component';
 
 @Component({
   selector: 'app-food',
@@ -14,6 +15,7 @@ import { FoodViewModel } from 'src/viewmodels/food';
   ]
 })
 export class FoodComponent implements OnInit {
+  @ViewChild(FoodAssociationFormComponent) foodAssociationForm: FoodAssociationFormComponent | undefined;
   @ViewChild("buttonModalError") buttonModalError: ElementRef | undefined;
 
   foodAssociations: FoodAssociation[] = [];
@@ -26,7 +28,7 @@ export class FoodComponent implements OnInit {
 
   constructor(private animalTypeService: AnimalTypeService, private foodAssociationService: FoodAssociationService, private foodService: FoodService) {}
 
-  private loadData(): void {
+  private loadData(onDataLoaded?: Function): void {
     this.foodService.get().subscribe(foodItems => {
       this.foodAssociationService.get().subscribe(foodAssociations => {
         this.animalTypeService.get().subscribe(animalTypes => {
@@ -45,14 +47,20 @@ export class FoodComponent implements OnInit {
               }).length
             };
           });
+
+          // Invoke additional callback (if provided).
+          onDataLoaded?.();
         });
       });
     });
   }
 
   private refresh(): void {
-    this.loadData();
-    this.selectedFoodItemTypes = null;
+    this.loadData(() => {
+      this.selectedFoodItemTypes = null;
+      this.foodAssociationForm?.ngOnInit();
+      this.showTypes(this.selectedFoodItemID);
+    });
   }
 
   ngOnInit(): void {
