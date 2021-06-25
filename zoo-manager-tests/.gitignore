@@ -1,0 +1,4 @@
+﻿# Ignore VS project build files
+.vs
+bin
+obj
