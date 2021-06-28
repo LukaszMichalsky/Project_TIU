@@ -10,6 +10,11 @@ using MongoDB.Driver;
 using zoo_manager_backend.Services;
 using zoo_manager_backend.Repositories;
 using zoo_manager_backend.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Collections.Generic;
+using System;
 
 namespace zoo_manager_backend {
     public class Startup {
@@ -21,10 +26,43 @@ namespace zoo_manager_backend {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-
             services.AddControllers();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "zoo_manager_backend", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
+                    Description = "JWT Authentication",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement() {
+                    {
+                        new OpenApiSecurityScheme() {
+                            Reference = new OpenApiReference() {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        }, new List<string>()
+                    }
+                });
+            });
+
+            services.AddAuthentication(authServices => {
+                authServices.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authServices.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options => {
+                options.TokenValidationParameters = new TokenValidationParameters() {
+                    ValidateActor = false,
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidateTokenReplay = false,
+
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("zoo-manager-backend"))
+                };
             });
 
             services.AddSingleton(new MongoClient(Config.DB_CONNECTION_STRING));
@@ -49,6 +87,8 @@ namespace zoo_manager_backend {
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().Build());
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {

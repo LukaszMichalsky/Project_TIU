@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 using zoo_manager_backend.Exceptions;
 using zoo_manager_backend.Models;
@@ -6,6 +7,7 @@ using zoo_manager_backend.Services;
 
 namespace zoo_manager_backend.Controllers {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ZookeeperController : ControllerBase {
         private readonly IZookeeperService zookeeperService;
