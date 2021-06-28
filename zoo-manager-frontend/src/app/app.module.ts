@@ -19,6 +19,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { ZookeeperAssociationFormComponent } from './components/forms/zookeeper-association-form/zookeeper-association-form.component';
 import { FoodAssociationFormComponent } from './components/forms/food-association-form/food-association-form.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FoodAssociationFormComponent } from './components/forms/food-associatio
     FoodFormComponent,
     MenuItemComponent,
     ZookeeperAssociationFormComponent,
-    FoodAssociationFormComponent
+    FoodAssociationFormComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

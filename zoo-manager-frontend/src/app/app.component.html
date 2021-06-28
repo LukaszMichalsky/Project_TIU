@@ -7,6 +7,10 @@
     <div class="col d-flex justify-content-center align-items-center">
       <h1 class="text-center text-light">ZOO Manager Project</h1>
     </div>
+
+    <div *ngIf="isAuthenticated" class="col-auto d-flex align-items-center">
+      <button (click)="logout()" class="btn btn-danger">Sign out</button>
+    </div>
   </div>
 
   <div class="row">

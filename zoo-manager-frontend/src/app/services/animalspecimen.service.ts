@@ -13,14 +13,26 @@ export class AnimalSpecimenService {
   constructor(private http: HttpClient) {}
 
   public get(): Observable<AnimalSpecimen[]> {
-    return this.http.get<AnimalSpecimen[]>(Config.getURL(this.controllerURL));
+    return this.http.get<AnimalSpecimen[]>(Config.getURL(this.controllerURL), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public post(newSpecimen: AnimalSpecimen): Observable<AnimalSpecimen> {
-    return this.http.post<AnimalSpecimen>(Config.getURL(this.controllerURL), newSpecimen);
+    return this.http.post<AnimalSpecimen>(Config.getURL(this.controllerURL), newSpecimen, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public delete(id: number): Observable<AnimalSpecimen> {
-    return this.http.delete<AnimalSpecimen>(Config.getURL(`${this.controllerURL}/${id}`));
+    return this.http.delete<AnimalSpecimen>(Config.getURL(`${this.controllerURL}/${id}`), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 }

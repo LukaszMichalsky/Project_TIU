@@ -13,14 +13,26 @@ export class AnimalTypeService {
   constructor(private http: HttpClient) {}
 
   public get(): Observable<AnimalType[]> {
-    return this.http.get<AnimalType[]>(Config.getURL(this.controllerURL));
+    return this.http.get<AnimalType[]>(Config.getURL(this.controllerURL), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public post(newType: AnimalType): Observable<AnimalType> {
-    return this.http.post<AnimalType>(Config.getURL(this.controllerURL), newType);
+    return this.http.post<AnimalType>(Config.getURL(this.controllerURL), newType, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public delete(id: number): Observable<AnimalType> {
-    return this.http.delete<AnimalType>(Config.getURL(`${this.controllerURL}/${id}`));
+    return this.http.delete<AnimalType>(Config.getURL(`${this.controllerURL}/${id}`), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 }

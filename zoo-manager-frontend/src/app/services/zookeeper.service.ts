@@ -13,14 +13,26 @@ export class ZookeeperService {
   constructor(private http: HttpClient) {}
 
   public get(): Observable<Zookeeper[]> {
-    return this.http.get<Zookeeper[]>(Config.getURL(this.controllerURL));
+    return this.http.get<Zookeeper[]>(Config.getURL(this.controllerURL), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public post(newType: Zookeeper): Observable<Zookeeper> {
-    return this.http.post<Zookeeper>(Config.getURL(this.controllerURL), newType);
+    return this.http.post<Zookeeper>(Config.getURL(this.controllerURL), newType, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public delete(id: number): Observable<Zookeeper> {
-    return this.http.delete<Zookeeper>(Config.getURL(`${this.controllerURL}/${id}`));
+    return this.http.delete<Zookeeper>(Config.getURL(`${this.controllerURL}/${id}`), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 }

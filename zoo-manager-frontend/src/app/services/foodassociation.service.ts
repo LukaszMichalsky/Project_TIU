@@ -13,14 +13,26 @@ export class FoodAssociationService {
   constructor(private http: HttpClient) {}
 
   public get(): Observable<FoodAssociation[]> {
-    return this.http.get<FoodAssociation[]>(Config.getURL(this.controllerURL));
+    return this.http.get<FoodAssociation[]>(Config.getURL(this.controllerURL), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public post(newAssociation: FoodAssociation): Observable<FoodAssociation> {
-    return this.http.post<FoodAssociation>(Config.getURL(this.controllerURL), newAssociation);
+    return this.http.post<FoodAssociation>(Config.getURL(this.controllerURL), newAssociation, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public delete(id: number): Observable<FoodAssociation> {
-    return this.http.delete<FoodAssociation>(Config.getURL(`${this.controllerURL}/${id}`));
+    return this.http.delete<FoodAssociation>(Config.getURL(`${this.controllerURL}/${id}`), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 }

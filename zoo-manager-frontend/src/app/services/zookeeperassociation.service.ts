@@ -13,14 +13,26 @@ export class ZookeeperAssociationService {
   constructor(private http: HttpClient) {}
 
   public get(): Observable<ZookeeperAssociation[]> {
-    return this.http.get<ZookeeperAssociation[]>(Config.getURL(this.controllerURL));
+    return this.http.get<ZookeeperAssociation[]>(Config.getURL(this.controllerURL), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public post(newAssociation: ZookeeperAssociation): Observable<ZookeeperAssociation> {
-    return this.http.post<ZookeeperAssociation>(Config.getURL(this.controllerURL), newAssociation);
+    return this.http.post<ZookeeperAssociation>(Config.getURL(this.controllerURL), newAssociation, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 
   public delete(id: number): Observable<ZookeeperAssociation> {
-    return this.http.delete<ZookeeperAssociation>(Config.getURL(`${this.controllerURL}/${id}`));
+    return this.http.delete<ZookeeperAssociation>(Config.getURL(`${this.controllerURL}/${id}`), {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`
+      }
+    });
   }
 }

@@ -1,0 +1,37 @@
+<app-modal modalID="modalError" modalTitle="Error">
+  {{errorMessage}}
+
+  <div class="d-flex justify-content-end m-3">
+    <button type="button" class="btn btn-danger m-1" data-bs-dismiss="modal">OK</button>
+  </div>
+</app-modal>
+
+<div style="display: grid; grid-template-columns: 1fr 450px 1fr; grid-template-rows: auto;">
+  <div></div>
+
+  <div class="bg-light px-2">
+    <form>
+      <div class="m-3">
+        <label class="form-label">Username</label>
+        <input #usernameInput class="form-control" type="text">
+        <div class="form-text">Enter your username</div>
+      </div>
+
+      <div class="m-3">
+        <label class="form-label">Password</label>
+        <input #passwordInput class="form-control" type="password">
+        <div class="form-text">Enter your password</div>
+      </div>
+
+      <div class="m-3 d-grid gap-0">
+        <button (click)="login()" type="button" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+
+  <div></div>
+</div>
+
+<div class="d-none">
+  <button #buttonModalError data-bs-toggle="modal" data-bs-target="#modalError"></button>
+</div>
